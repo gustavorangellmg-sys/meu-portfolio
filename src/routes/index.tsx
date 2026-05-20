@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { projects } from "@/lib/projects";
 import { Footer } from "@/components/Footer";
 import { Marquee } from "@/components/Marquee";
@@ -26,6 +26,34 @@ export const Route = createFileRoute("/")({
 function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    let activeBlobUrl: string | null = null;
+
+    // Fetch the video and create a local blob URL for high-performance instant seeking without triggering HTTP Range network requests
+    fetch(heroVideo)
+      .then((res) => {
+        if (!res.ok) throw new Error("Falha ao carregar o vídeo");
+        return res.blob();
+      })
+      .then((blob) => {
+        const blobUrl = URL.createObjectURL(blob);
+        activeBlobUrl = blobUrl;
+        setVideoSrc(blobUrl);
+      })
+      .catch((err) => {
+        console.error("Erro ao pré-carregar vídeo do hero:", err);
+        // Fallback to direct import path if download fails
+        setVideoSrc(heroVideo);
+      });
+
+    return () => {
+      if (activeBlobUrl) {
+        URL.revokeObjectURL(activeBlobUrl);
+      }
+    };
+  }, []);
   
   // Track scroll progress of the entire 200vh track
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
@@ -62,7 +90,7 @@ function Home() {
   // Scrub the video currentTime directly to avoid delay
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const video = videoRef.current;
-    if (!video || !video.duration) return;
+    if (!video || video.readyState < 1 || !video.duration) return;
     
     // Scrub the video fully between 0 and 0.8 scroll progress
     // This leaves a clean 0.8 to 1.0 transition for exit animations
@@ -73,7 +101,7 @@ function Home() {
   // Handle case where user reloads or starts partway down the page
   const handleLoadedMetadata = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || video.readyState < 1) return;
     const latest = scrollYProgress.get();
     const scrubProgress = Math.min(latest / 0.8, 1);
     video.currentTime = scrubProgress * video.duration;
@@ -91,6 +119,7 @@ function Home() {
             className="absolute inset-0 z-0 pointer-events-none origin-top"
           >
             <video
+              key={videoSrc || "pending"}
               ref={videoRef}
               onLoadedMetadata={handleLoadedMetadata}
               preload="auto"
@@ -98,7 +127,7 @@ function Home() {
               playsInline
               className="h-full w-full object-cover grayscale brightness-[0.4] contrast-[1.1]"
             >
-              <source src={heroVideo} type="video/mp4" />
+              {videoSrc && <source src={videoSrc} type="video/mp4" />}
             </video>
             {/* Vignette & Gradients to guarantee high text readability */}
             <div className="absolute inset-0 bg-radial-gradient from-transparent via-background/40 to-background/90" />

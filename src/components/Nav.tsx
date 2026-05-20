@@ -26,7 +26,7 @@ export function Nav() {
               <Link
                 key={i.to}
                 to={i.to}
-                className="group relative text-sm uppercase tracking-widest text-paper"
+                className="group relative inline-block overflow-hidden text-sm uppercase tracking-widest text-paper"
               >
                 <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover:-translate-y-full">
                   {i.label}
