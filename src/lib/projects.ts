@@ -1,4 +1,5 @@
 import jadiel from "@/assets/jadiel.jpg";
+import baileCover from "@/assets/baile-cover.png";
 import mgi from "@/assets/mgi.jpg";
 import fornalha from "@/assets/fornalha.jpg";
 import sandra from "@/assets/sandra.jpg";
@@ -34,7 +35,7 @@ export const projects: Project[] = [
     ],
     role: ["Direção de arte", "Identidade visual", "Sistema de aplicação"],
     tools: ["Illustrator", "Photoshop", "InDesign"],
-    cover: jadiel,
+    cover: baileCover,
     accent: "#5a7a3a",
   },
   {
