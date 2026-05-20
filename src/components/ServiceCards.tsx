@@ -29,11 +29,13 @@ export function ServiceCards() {
         return next;
       });
       setCyclingId(null);
-    }, 380); // Match transit time
+    }, 600); // Elegant transit time
   };
 
   // Automatic infinite cycling loop
   useEffect(() => {
+    if (isHovered) return; // Pause automatic cycling when hovering
+
     const timer = setInterval(() => {
       // Only cycle if not currently in a transition
       if (cyclingId === null) {
@@ -42,7 +44,7 @@ export function ServiceCards() {
     }, 4500); // Cycle every 4.5 seconds
 
     return () => clearInterval(timer);
-  }, [cardOrder, cyclingId]);
+  }, [cardOrder, cyclingId, isHovered]);
 
   const getCardStyle = (id: number) => {
     const position = cardOrder.indexOf(id);
@@ -56,7 +58,6 @@ export function ServiceCards() {
         rotate: 12,
         scale: 0.96,
         opacity: 0,
-        filter: "blur(20px)",
         pointerEvents: "none" as const,
       };
     }
@@ -66,32 +67,29 @@ export function ServiceCards() {
         zIndex: 30,
         x: 0,
         y: 0,
-        rotate: isHovered ? -2.5 : 0,
-        scale: isHovered ? 1.015 : 1.0,
+        rotate: isHovered ? -3 : 0,
+        scale: isHovered ? 1.025 : 1.0,
         opacity: 1,
-        filter: "blur(0px)",
         pointerEvents: "auto" as const,
       };
     } else if (position === 1) {
       return {
         zIndex: 20,
         x: 0,
-        y: isHovered ? -35 : -16,
-        rotate: isHovered ? 2.5 : 2,
+        y: isHovered ? -38 : -16,
+        rotate: isHovered ? 3 : 2,
         scale: isHovered ? 0.98 : 0.94,
-        opacity: 0.9,
-        filter: "blur(1px)",
+        opacity: 0.95,
         pointerEvents: "none" as const,
       };
     } else {
       return {
         zIndex: 10,
         x: 0,
-        y: isHovered ? -70 : -32,
+        y: isHovered ? -76 : -32,
         rotate: isHovered ? -4 : -2,
-        scale: isHovered ? 0.93 : 0.88,
-        opacity: 0.7,
-        filter: "blur(2px)",
+        scale: isHovered ? 0.94 : 0.88,
+        opacity: 0.75,
         pointerEvents: "none" as const,
       };
     }
@@ -330,6 +328,7 @@ export function ServiceCards() {
       {services.map((service) => {
         const style = getCardStyle(service.id);
         const isTop = cardOrder[0] === service.id;
+        const position = cardOrder.indexOf(service.id);
 
         return (
           <motion.div
@@ -338,9 +337,9 @@ export function ServiceCards() {
             animate={style as any}
             transition={{
               type: "spring",
-              stiffness: cyclingId === service.id ? 105 : 260, // Slow, elegant glide on exit
-              damping: cyclingId === service.id ? 22 : 24,
-              mass: 0.9,
+              stiffness: 100, // Premium slow spring
+              damping: 16,
+              mass: 0.8,
             }}
             className="absolute inset-0 w-full h-full bg-[#0d0d0f] border border-white/[0.08] rounded-[2rem] p-6 md:p-8 flex flex-col justify-between shadow-2xl overflow-hidden cursor-pointer"
             onClick={() => isTop && handleCycle(service.id)}
@@ -349,7 +348,22 @@ export function ServiceCards() {
             {/* Ambient Card Background Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col md:flex-row items-stretch justify-between h-full gap-6 md:gap-8">
+            <motion.div
+              className="relative z-10 flex flex-col md:flex-row items-stretch justify-between h-full gap-6 md:gap-8 w-full"
+              animate={{
+                y: isTop 
+                  ? [0, -6, 0] 
+                  : position === 1 
+                  ? [0, -4, 0] 
+                  : [0, -2, 0]
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: position * 0.4
+              }}
+            >
               {/* LEFT COLUMN: TEXT CONTENT */}
               <div className="flex flex-col justify-between flex-1 relative z-10 text-left">
                 <div>
@@ -382,7 +396,7 @@ export function ServiceCards() {
               <div className="w-full md:w-[200px] lg:w-[240px] shrink-0 h-[140px] md:h-full flex items-center justify-center bg-black/45 rounded-2xl border border-white/[0.04] p-1 overflow-hidden">
                 {service.illustration}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         );
       })}
