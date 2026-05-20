@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { RevealLine, FadeUp } from "@/components/Reveal";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import { JadielProjectPage } from "@/components/JadielProjectPage";
 
 export const Route = createFileRoute("/projects/$slug")({
   head: ({ params }) => {
@@ -38,6 +39,12 @@ export const Route = createFileRoute("/projects/$slug")({
 
 function ProjectPage() {
   const { project: p } = Route.useLoaderData() as { project: Project };
+
+  // Render highly-interactive showcase page for Jadiel Oliveira
+  if (p.slug === "jadiel-oliveira") {
+    return <JadielProjectPage project={p} />;
+  }
+
   const idx = projects.findIndex((x) => x.slug === p.slug);
   const next = projects[(idx + 1) % projects.length];
 

@@ -22,7 +22,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "jadiel-oliveira",
-    title: "Baile Diferente",
+    title: "Jadiel Oliveira - Baile Diferente",
     client: "Jadiel Oliveira",
     category: "Branding & Identidade",
     year: "2024",
