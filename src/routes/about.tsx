@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Footer } from "@/components/Footer";
 import { RevealLine, FadeUp } from "@/components/Reveal";
 import portrait from "@/assets/portrait.jpg";
@@ -29,6 +29,13 @@ const disciplines = [
 const tools = ["Illustrator", "Photoshop", "InDesign", "After Effects", "Premiere", "Lightroom", "Figma"];
 
 const clients = ["V4 Company", "Hpack Embalagens", "Fundação MGI", "Grupo Focar", "Sandra Lessa", "Jadiel Oliveira"];
+
+const clientSlugMap: Record<string, string> = {
+  "Fundação MGI": "fundacao-mgi",
+  "Grupo Focar": "grupo-focar",
+  "Sandra Lessa": "sandra-lessa",
+  "Jadiel Oliveira": "jadiel-oliveira",
+};
 
 function AboutPage() {
   return (
@@ -103,11 +110,30 @@ function AboutPage() {
           <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground md:col-span-3">— Clientes</p>
           <div className="md:col-span-9">
             <ul className="space-y-1">
-              {clients.map((c, i) => (
-                <FadeUp key={c} delay={i * 0.05}>
-                  <li className="border-b border-border py-4 font-display text-3xl md:text-5xl">{c}</li>
-                </FadeUp>
-              ))}
+              {clients.map((c, i) => {
+                const slug = clientSlugMap[c];
+                return (
+                  <FadeUp key={c} delay={i * 0.05}>
+                    <li className="border-b border-border py-4 font-display text-3xl md:text-5xl group">
+                      {slug ? (
+                        <Link
+                          to="/projects/$slug"
+                          params={{ slug }}
+                          className="flex items-center justify-between hover:text-primary transition-colors w-full"
+                          data-cursor="hover"
+                        >
+                          <span>{c}</span>
+                          <span className="text-xs font-sans tracking-widest text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)]">
+                            Ver Projeto →
+                          </span>
+                        </Link>
+                      ) : (
+                        <span className="text-muted-foreground/40">{c}</span>
+                      )}
+                    </li>
+                  </FadeUp>
+                );
+              })}
             </ul>
           </div>
         </div>
