@@ -1,8 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { ArrowLeft, Copy, Check, Play, Square, RefreshCw, Volume2 } from "lucide-react";
+import { ArrowLeft, Copy, Check, Play, Square, RefreshCw, Volume2, Maximize2, ExternalLink } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import type { Project } from "@/lib/projects";
+
+// Import real project assets
+import heroImage from "@/assets/Proposta de imagem para a Hero (Jadiel Oliveira).png";
+import originalMoodboard from "@/assets/media__1779744441303.png";
+import mockupEcobag from "@/assets/media__1779744441449.jpg";
+import mockupFlatlay from "@/assets/media__1779744441557.png";
 
 interface JadielProjectPageProps {
   project: Project;
@@ -12,14 +18,15 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const moodboardRef = useRef<HTMLDivElement>(null);
 
-  // Parallax Scroll Effects
+  // Parallax Scroll Effects for Hero Image Background
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 80]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
+  const heroBgY = useTransform(scrollYProgress, [0, 0.4], ["0%", "20%"]);
+  const heroContentY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
 
   // Color Palette Copy State
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
@@ -31,13 +38,16 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
 
   // Typographic specimen state
   const [fontSize, setFontSize] = useState<number>(64);
-  const [specimenText, setSpecimenText] = useState<string>("Kilimanjaro");
+  const [specimenText, setSpecimenText] = useState<string>("SUA GLÓRIA, PRESENÇA MESMO NA MINHA AUSÊNCIA LEMBRA DE MIM");
 
   // Vinyl Player State
   const [vinylState, setVinylState] = useState<"idle" | "slid-out" | "playing">("idle");
   const [vinylCrackle, setVinylCrackle] = useState<boolean>(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const noiseSourceRef = useRef<AudioBufferSourceNode | null>(null);
+
+  // Lightbox Modal State
+  const [activeImage, setActiveImage] = useState<string | null>(null);
 
   const startVinylSynth = () => {
     try {
@@ -87,7 +97,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
       noiseSourceRef.current = source;
       setVinylCrackle(true);
     } catch (e) {
-      console.warn("Web Audio blockado ou não suportado:", e);
+      console.warn("Web Audio bloqueado ou não suportado:", e);
     }
   };
 
@@ -140,12 +150,12 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
     <main ref={containerRef} className="bg-[#2C5E3B] text-[#FCE6B2] min-h-screen relative overflow-x-hidden selection:bg-[#D4613C] selection:text-white pb-32">
       {/* Dynamic Font Styling Injected into Component */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@300;400;500;700&family=Syne:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@300;400;500;700&family=Syne:wght@700;800&family=Unbounded:wght@400;700;900&display=swap');
         
         .font-display-kilimanjaro {
-          font-family: 'Syne', sans-serif;
-          font-weight: 800;
-          letter-spacing: -0.03em;
+          font-family: 'Unbounded', sans-serif;
+          font-weight: 900;
+          letter-spacing: -0.04em;
         }
         .font-brand-editorial {
           font-family: 'Bricolage Grotesque', sans-serif;
@@ -173,202 +183,95 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
         </span>
       </nav>
 
-      {/* HERO SECTION - ELEGANT EDITORIAL STYLE (vanschneider style) */}
-      <section className="min-h-screen flex flex-col justify-between pt-36 px-6 md:px-12 pb-16 relative">
-        <motion.div style={{ y: heroY, scale: heroScale }} className="w-full">
-          <div className="flex items-center gap-4 text-xs font-body-jakarta font-bold uppercase tracking-[0.25em] text-[#D4613C] mb-6">
-            <span>{p.category}</span>
+      {/* HERO SECTION - PREMIUM FULL SCREEN BACKGROUND (with contrast enhancements) */}
+      <section className="min-h-screen flex flex-col justify-between pt-36 px-6 md:px-12 pb-16 relative overflow-hidden">
+        {/* Cinematic full screen background photo of Jadiel Oliveira */}
+        <motion.div 
+          style={{ y: heroBgY }}
+          className="absolute inset-0 z-0 select-none origin-top pointer-events-none"
+        >
+          <img 
+            src={heroImage} 
+            alt="Jadiel Oliveira Hero background" 
+            className="w-full h-full object-cover scale-[1.03]"
+          />
+          {/* Contrast-boosting premium overlays */}
+          <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#2C5E3B]/45 to-[#2C5E3B]/90 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2C5E3B] via-[#2C5E3B]/35 to-black/65" />
+        </motion.div>
+
+        {/* Hero typography overlay */}
+        <motion.div style={{ y: heroContentY, opacity: heroOpacity }} className="w-full relative z-10 my-auto max-w-5xl">
+          <div className="flex items-center gap-4 text-xs font-body-jakarta font-bold uppercase tracking-[0.25em] text-[#FCE6B2] mb-6">
+            <span className="bg-[#D4613C] text-white px-3 py-1 rounded-full text-[10px]">{p.category}</span>
             <span>•</span>
-            <span>{p.year}</span>
+            <span className="font-semibold text-white/95">{p.year}</span>
           </div>
 
-          <h1 className="font-brand-editorial text-[14vw] md:text-[8vw] leading-[0.82] text-[#FCE6B2] tracking-tighter text-balance">
+          <h1 className="font-brand-editorial text-[13vw] md:text-[7.5vw] leading-[0.82] text-[#FCE6B2] tracking-tighter text-balance uppercase drop-shadow-2xl">
             Jadiel Oliveira
             <br />
-            <span className="text-transparent" style={{ WebkitTextStroke: "2px #FCE6B2" }}>
+            <span className="text-[#D4613C] font-black">
               Baile Diferente
             </span>
           </h1>
+
+          <p className="font-body-jakarta text-white text-lg md:text-2xl font-medium max-w-3xl leading-relaxed mt-8 drop-shadow-lg text-balance">
+            {p.story[0]}
+          </p>
         </motion.div>
 
-        {/* HERO IMAGE AND INTRO COLLAGE */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mt-12">
-          <div className="lg:col-span-5 space-y-6">
-            <motion.p 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="font-brand-editorial text-2xl md:text-4xl text-[#FCE6B2] leading-tight text-balance"
-            >
-              "Uma identidade que dança livremente entre o erudito e o popular."
-            </motion.p>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              className="font-body-jakarta text-[#FCE6B2]/80 text-base md:text-lg leading-relaxed max-w-xl"
-            >
-              {p.story[0]}
-            </motion.p>
-          </div>
-
-          <div className="lg:col-span-7 w-full h-[50vh] lg:h-[70vh] rounded-[2.5rem] overflow-hidden border border-[#FCE6B2]/15 relative shadow-2xl">
-            <motion.img
-              initial={{ scale: 1.1, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              src={p.cover}
-              alt="Jadiel Oliveira Portrait"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#2C5E3B]/70 to-transparent" />
-            
-            {/* Visual identity badge floating */}
-            <div className="absolute bottom-8 left-8 flex flex-col">
-              <span className="text-[10px] tracking-[0.2em] text-[#D4613C] uppercase font-bold">Direção Criativa</span>
-              <span className="font-brand-editorial text-xl text-white">Gustavo Rangel © 2024</span>
-            </div>
-          </div>
+        {/* Footer of the hero block */}
+        <div className="relative z-10 flex justify-between items-end border-t border-[#FCE6B2]/15 pt-6 w-full">
+          <span className="text-[10px] tracking-[0.2em] text-[#FCE6B2]/60 uppercase font-bold">Direção Criativa & Design</span>
+          <span className="font-brand-editorial text-lg text-white">Gustavo Rangel © 2024</span>
         </div>
       </section>
 
-      {/* MOODBOARD SECTION (antonandirene / locomotive inspired collage) */}
+      {/* MOODBOARD SECTION (Real original Moodboard image display with zoomable frame) */}
       <section ref={moodboardRef} className="py-24 px-6 md:px-12 bg-[#0d0d0f] text-[#FCE6B2] rounded-[3.5rem] border border-[#FCE6B2]/10 my-16">
         <div className="max-w-4xl mb-16">
           <span className="text-xs uppercase tracking-[0.3em] font-body-jakarta text-[#D4613C] font-bold block mb-4">REFERÊNCIAS E CONCEITO</span>
           <h2 className="font-brand-editorial text-4xl md:text-6xl text-[#FCE6B2] mb-6 leading-none">
-            Moodboard.
+            Moodboard Original.
           </h2>
           <p className="font-body-jakarta text-[#FCE6B2]/75 text-lg md:text-xl leading-relaxed">
-            Uma síntese das referências de imagem, estética e conceitos geométricos que pautaram a identidade visual africana contemporânea e urbana.
+            Esta é a colagem semântica original do projeto — reunindo as referências estéticas, contrastes cromáticos de terra e folha, tipografia expressiva e a essência da cultura afro-contemporânea urbana que pavimentou o caminho criativo.
           </p>
         </div>
 
-        {/* High-Fidelity SVG Interactive Moodboard Canvas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Interactive moodboard container */}
+        <motion.div 
+          whileHover={{ scale: 1.01 }}
+          className="relative rounded-[2.5rem] overflow-hidden border border-[#FCE6B2]/15 shadow-2xl bg-zinc-950 group cursor-zoom-in"
+          onClick={() => setActiveImage(originalMoodboard)}
+        >
+          <img 
+            src={originalMoodboard} 
+            alt="Moodboard Original do Projeto Baile Diferente" 
+            className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none" />
           
-          {/* Card 1: Opara Wave Canvas */}
-          <motion.div 
-            whileHover={{ y: -8 }}
-            className="bg-[#2C5E3B] border border-[#FCE6B2]/10 p-8 rounded-[2.5rem] h-[380px] flex flex-col justify-between relative overflow-hidden group"
-          >
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#FCE6B2_1px,transparent_1px)] [background-size:16px_16px]" />
-            <div className="flex justify-between items-start relative z-10">
-              <span className="text-xs font-bold tracking-widest text-[#FCE6B2]/60 uppercase">Ref 01 / Fluidez</span>
-              <span className="text-2xl font-brand-editorial text-[#D4613C]">opara</span>
+          {/* Zoom indicator overlay */}
+          <div className="absolute top-6 right-6 bg-black/75 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-[#FCE6B2] opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center gap-2">
+            <Maximize2 className="w-3.5 h-3.5" />
+            Expandir Moodboard
+          </div>
+
+          <div className="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 pointer-events-none">
+            <div>
+              <span className="text-[10px] tracking-widest font-bold uppercase text-[#D4613C]">Estudo Conceitual</span>
+              <h3 className="font-brand-editorial text-2xl text-white mt-1">Conexões Visuais & Contrapontos</h3>
             </div>
-            
-            {/* Smooth dynamic wave drawing */}
-            <div className="w-full h-[180px] flex items-center justify-center relative z-10">
-              <svg className="w-full h-full" viewBox="0 0 240 120" fill="none">
-                <motion.path 
-                  d="M10,80 C50,20 80,100 120,40 C160,-20 190,70 230,20" 
-                  stroke="#FCE6B2" 
-                  strokeWidth="3.5" 
-                  strokeLinecap="round" 
-                  animate={{ d: [
-                    "M10,80 C50,20 80,100 120,40 C160,-20 190,70 230,20",
-                    "M10,60 C50,90 90,30 130,70 C170,110 190,40 230,80",
-                    "M10,80 C50,20 80,100 120,40 C160,-20 190,70 230,20"
-                  ]}}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <motion.path 
-                  d="M10,100 C60,40 70,120 130,50 C190,-20 180,90 230,40" 
-                  stroke="#D4613C" 
-                  strokeWidth="1.5" 
-                  strokeLinecap="round"
-                  strokeDasharray="6 4"
-                  animate={{ d: [
-                    "M10,100 C60,40 70,120 130,50 C190,-20 180,90 230,40",
-                    "M10,80 C40,40 80,90 120,80 C160,70 190,10 230,60",
-                    "M10,100 C60,40 70,120 130,50 C190,-20 180,90 230,40"
-                  ]}}
-                  transition={{ duration: 6, delay: 0.5, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </svg>
-            </div>
-            
-            <p className="font-body-jakarta text-sm text-[#FCE6B2]/80 relative z-10 leading-relaxed">
-              O rio Opara e o conceito de fluidez nas águas. Formas curvas inspiradas em design de posters dos anos 70.
+            <p className="font-body-jakarta text-xs text-[#FCE6B2]/70 max-w-md leading-relaxed">
+              O rio Opara, tipografia de peso em cartazes dos anos 70, e a expressividade modular da cena acústica africana urbana.
             </p>
-          </motion.div>
-
-          {/* Card 2: Geometric Modular Bauhaus Art */}
-          <motion.div 
-            whileHover={{ y: -8 }}
-            className="bg-[#D4613C] border border-black/10 p-8 rounded-[2.5rem] h-[380px] flex flex-col justify-between relative overflow-hidden text-white"
-          >
-            <div className="absolute inset-0 bg-[#0d0d0f]/15" />
-            <div className="flex justify-between items-start relative z-10">
-              <span className="text-xs font-bold tracking-widest text-white/70 uppercase">Ref 02 / Bauhaus</span>
-              <span className="text-[#FCE6B2] text-xl font-brand-editorial">Módulo</span>
-            </div>
-
-            {/* Retro grid collage of abstract vectors */}
-            <div className="grid grid-cols-3 gap-2 w-full h-[180px] items-center relative z-10">
-              <motion.div 
-                className="aspect-square bg-[#FCE6B2] rounded-full"
-                animate={{ scale: [1, 1.15, 1] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <div className="aspect-square bg-white rounded-2xl flex items-center justify-center text-black font-brand-editorial text-2xl">
-                J
-              </div>
-              <div className="aspect-square bg-[#2C5E3B] rounded-2xl overflow-hidden relative">
-                <div className="absolute inset-x-0 bottom-0 top-1/2 bg-[#FCE6B2]" />
-              </div>
-              <div className="aspect-square bg-white/20 rounded-2xl" />
-              <motion.div 
-                className="aspect-square bg-white rounded-full overflow-hidden flex items-center justify-center text-[#D4613C] font-bold text-lg"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                ✦
-              </motion.div>
-              <div className="aspect-square bg-[#FCE6B2] rounded-full" />
-            </div>
-
-            <p className="font-body-jakarta text-sm text-white/90 relative z-10 leading-relaxed">
-              Módulos gráficos intercambiáveis. Bauhaus, Joan Miró e a mistura geométrica da tipografia de peso.
-            </p>
-          </motion.div>
-
-          {/* Card 3: Afro Silhouette Poster */}
-          <motion.div 
-            whileHover={{ y: -8 }}
-            className="bg-[#FCE6B2] border border-black/10 p-8 rounded-[2.5rem] h-[380px] flex flex-col justify-between relative overflow-hidden text-[#0d0d0f] lg:col-span-1 md:col-span-2"
-          >
-            <div className="absolute inset-0 bg-[#90593B]/5" />
-            <div className="flex justify-between items-start relative z-10">
-              <span className="text-xs font-bold tracking-widest text-[#0d0d0f]/60 uppercase">Ref 03 / Identidade</span>
-              <span className="text-[#2C5E3B] text-xl font-brand-editorial">Afro</span>
-            </div>
-
-            {/* Stylized high fidelity African vector layout */}
-            <div className="w-full h-[180px] flex items-center justify-center relative z-10">
-              <svg className="w-[140px] h-[140px] opacity-85" viewBox="0 0 120 120" fill="none">
-                {/* Silhouette representing Afro-inspired culture */}
-                <circle cx="60" cy="50" r="32" fill="#D4613C" />
-                <path d="M60,18 C40,18 20,38 20,62 L100,62 C100,38 80,18 60,18 Z" fill="#2C5E3B" />
-                {/* Geometric rings */}
-                <circle cx="60" cy="50" r="44" stroke="#90593B" strokeWidth="1.5" strokeDasharray="4 2" />
-                {/* Spark lines */}
-                <line x1="60" y1="2" x2="60" y2="12" stroke="#2C5E3B" strokeWidth="2" />
-                <line x1="12" y1="50" x2="2" y2="50" stroke="#D4613C" strokeWidth="2" />
-                <line x1="108" y1="50" x2="118" y2="50" stroke="#D4613C" strokeWidth="2" />
-              </svg>
-            </div>
-
-            <p className="font-body-jakarta text-sm text-[#0d0d0f]/85 relative z-10 leading-relaxed">
-              Expressividade e tom quente. Fotografia com contrastes severos e elementos que remetem ao acústico.
-            </p>
-          </motion.div>
-
-        </div>
+          </div>
+        </motion.div>
       </section>
 
-      {/* LOGOS AND VARIATIONS SHOWCASE */}
+      {/* LOGOS AND VARIATIONS SHOWCASE (Recreated to match the real branding lockups) */}
       <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="mb-16">
           <span className="text-xs uppercase tracking-[0.3em] font-body-jakarta text-[#D4613C] font-bold block mb-4">SISTEMA GRÁFICO</span>
@@ -376,33 +279,32 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
             Logotipos e Variações.
           </h2>
           <p className="font-body-jakarta text-[#FCE6B2]/80 text-lg max-w-3xl leading-relaxed">
-            Desenvolvemos um logotipo mutável baseado em pesos tipográficos fortes e variações geométricas. Passe o mouse para interagir com o sistema dinâmico.
+            O logotipo foi construído para transmitir o ritmo e a fluidez do próprio Baile. As variações passeiam entre o padrão cursivo, selo circular, e o monograma compacto de estrela com semi-círculos de argila.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* LOGO 1: JA DI (Green on Yellow-beige) */}
+          {/* LOGO 1: JADIEL OLIVEIRA (High-fidelity inline styled brand logo) */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="lg:col-span-4 bg-[#FCE6B2] text-[#2C5E3B] p-8 rounded-[2.5rem] min-h-[340px] flex flex-col justify-between border border-[#FCE6B2]/10"
           >
-            <span className="text-[10px] tracking-widest font-bold uppercase opacity-60">Logotipo Padrão</span>
+            <span className="text-[10px] tracking-widest font-bold uppercase opacity-60">Logotipo Cursivo Padrão</span>
             
-            <div className="flex-1 flex items-center justify-center py-6">
+            <div className="flex-1 flex flex-col items-center justify-center py-6 text-center">
               <motion.div 
-                className="text-center font-display-kilimanjaro text-7xl md:text-8xl leading-none flex items-center gap-1"
-                whileHover={{ rotate: [-2, 2, -2, 0] }}
-                transition={{ duration: 0.5 }}
+                className="font-brand-editorial text-4xl md:text-5xl text-[#2C5E3B] font-black uppercase tracking-tighter leading-[0.85] flex flex-col"
+                whileHover={{ scale: 1.05 }}
               >
-                <span>JA</span>
-                <span className="text-[#D4613C]">Di</span>
+                <span>Jadiel</span>
+                <span className="text-[#D4613C] text-5xl md:text-6xl font-display-kilimanjaro tracking-normal font-extrabold italic pl-3">Oliveira</span>
               </motion.div>
             </div>
 
             <div className="flex justify-between items-center text-xs opacity-75 font-body-jakarta">
-              <span>ESTILO CORRIDO</span>
-              <span>JADI / JADIEL</span>
+              <span>ESTILO RÍTMICO</span>
+              <span>MARCA PRINCIPAL</span>
             </div>
           </motion.div>
 
@@ -411,61 +313,62 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
             whileHover={{ scale: 1.02 }}
             className="lg:col-span-5 bg-[#D4613C] text-[#FCE6B2] p-8 rounded-[2.5rem] min-h-[340px] flex flex-col justify-between border border-white/5 relative overflow-hidden group"
           >
-            <span className="text-[10px] tracking-widest font-bold uppercase text-white/70">Badge Circular</span>
+            <span className="text-[10px] tracking-widest font-bold uppercase text-white/70">Selo Circular</span>
 
             <div className="flex-1 flex items-center justify-center py-4 relative z-10">
               <motion.div 
                 className="w-[180px] h-[180px]"
                 whileHover={{ rotate: 180 }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
               >
                 <svg className="w-full h-full" viewBox="0 0 200 200">
                   <path id="circlePath" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" fill="none" />
                   
                   {/* Decorative rotating background sun */}
-                  <circle cx="100" cy="100" r="50" fill="#2C5E3B" opacity="0.4" />
-                  <text fill="#FCE6B2" className="font-brand-editorial text-[13px] tracking-[0.25em] uppercase">
+                  <circle cx="100" cy="100" r="48" fill="#2C5E3B" opacity="0.3" />
+                  <text fill="#FCE6B2" className="font-brand-editorial text-[12.5px] tracking-[0.27em] uppercase">
                     <textPath href="#circlePath" startOffset="0%">
                       • Ó JADIEL OLIVEIRA • BAILE DIFERENTE •
                     </textPath>
                   </text>
-                  <text fill="#FCE6B2" className="font-display-kilimanjaro text-2xl" x="100" y="108" textAnchor="middle">
-                    JAD
+                  <text fill="#FCE6B2" className="font-display-kilimanjaro text-2xl font-black italic" x="100" y="107" textAnchor="middle">
+                    JADI
                   </text>
                 </svg>
               </motion.div>
             </div>
 
             <div className="flex justify-between items-center text-xs text-white/80 font-body-jakarta relative z-10">
-              <span>SELO ADICIONAL</span>
-              <span>ROTATIVO</span>
+              <span>SELO ROTATIVO</span>
+              <span>ESTILO VINIL</span>
             </div>
           </motion.div>
 
-          {/* LOGO 3: JADI (Clay-brown with sunburst icon) */}
+          {/* LOGO 3: JADI MONOGRAMA (Recreated to match the 8-pointed star & clay semicircles from tote bag!) */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="lg:col-span-3 bg-[#90593B] text-[#FCE6B2] p-8 rounded-[2.5rem] min-h-[340px] flex flex-col justify-between border border-[#FCE6B2]/10"
           >
-            <span className="text-[10px] tracking-widest font-bold uppercase opacity-60">Logotipo Monograma</span>
+            <span className="text-[10px] tracking-widest font-bold uppercase opacity-60">Monograma Compacto</span>
 
             <div className="flex-1 flex flex-col items-center justify-center py-6 gap-2">
-              <motion.div 
-                className="font-display-kilimanjaro text-6xl leading-none"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                JADI
-              </motion.div>
-              {/* Pulsing Sunburst icon */}
-              <svg className="w-8 h-8 opacity-75" viewBox="0 0 32 32" fill="none">
-                <circle cx="16" cy="16" r="4" fill="#D4613C" />
-                <path d="M16,2 L16,6 M16,26 L16,30 M2,16 L6,16 M26,16 L30,16 M6,6 L10,10 M22,22 L26,26 M6,26 L10,22 M22,10 L26,6" stroke="#FCE6B2" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+              <div className="relative w-28 h-28 flex items-center justify-center">
+                {/* Terracota half circles stacked */}
+                <div className="absolute inset-x-0 bottom-2 top-1/2 bg-[#D4613C] rounded-b-full opacity-90 border border-white/5" />
+                <div className="absolute inset-x-4 bottom-8 top-1/3 bg-[#D4613C]/40 rounded-t-full border border-white/5" />
+                
+                {/* 8-pointed star in primary green */}
+                <svg className="w-16 h-16 text-[#2C5E3B] relative z-10 drop-shadow-lg" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="16" cy="16" r="3" fill="#2C5E3B" />
+                  <path d="M16,2 L16,30 M2,16 L30,16 M6,6 L26,26 M6,26 L26,6" />
+                </svg>
+              </div>
+              
+              <span className="font-brand-editorial text-2xl uppercase tracking-widest mt-1">JADi</span>
             </div>
 
             <div className="flex justify-between items-center text-xs opacity-75 font-body-jakarta">
-              <span>VARIAÇÃO COMPACTA</span>
+              <span>SÍMBOLO INTEGRADO</span>
               <span>ÍCONE SOLAR</span>
             </div>
           </motion.div>
@@ -534,7 +437,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
         </div>
       </section>
 
-      {/* TYPOGRAPHY SPECIMEN SANDBOX (Editorial styled specimen) */}
+      {/* TYPOGRAPHY SPECIMEN SANDBOX (Updated to use Unbounded representing Kilimanjaro Sans) */}
       <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
@@ -546,7 +449,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
                 Tipografia.
               </h2>
               <p className="font-body-jakarta text-[#FCE6B2]/85 text-base md:text-lg leading-relaxed">
-                Usamos a fonte **Kilimanjaro Sans** como tipografia display expressiva e marcante nos títulos gerais. Para o conteúdo editorial e suporte, aplicamos a clássica **Helvetica Neue** em suas diferentes variações de peso.
+                Usamos a fonte **Kilimanjaro Sans** (aqui representada com toda a sua densidade e peso pela fonte **Unbounded**) como tipografia display expressiva e marcante nos títulos gerais. Para o suporte editorial, aplicamos a clássica **Helvetica Neue**.
               </p>
             </div>
 
@@ -557,11 +460,11 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
               {/* Font selector input */}
               <div className="space-y-2">
                 <label className="text-xs font-body-jakarta text-[#FCE6B2]/70 uppercase font-bold">Texto de Teste</label>
-                <input 
-                  type="text" 
+                <textarea 
+                  rows={3}
                   value={specimenText}
                   onChange={(e) => setSpecimenText(e.target.value)}
-                  className="w-full bg-[#141416] border border-[#FCE6B2]/15 text-[#FCE6B2] px-4 py-3 rounded-xl focus:outline-none focus:border-[#D4613C] font-body-jakarta text-sm transition-colors"
+                  className="w-full bg-[#141416] border border-[#FCE6B2]/15 text-[#FCE6B2] px-4 py-3 rounded-xl focus:outline-none focus:border-[#D4613C] font-body-jakarta text-xs leading-normal transition-colors"
                 />
               </div>
 
@@ -574,7 +477,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
                 <input 
                   type="range" 
                   min="24" 
-                  max="120" 
+                  max="100" 
                   value={fontSize}
                   onChange={(e) => setFontSize(parseInt(e.target.value))}
                   className="w-full accent-[#D4613C] bg-[#141416] rounded-lg cursor-pointer h-1.5"
@@ -588,11 +491,11 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
             
             {/* Display specimen */}
             <div className="border-b border-[#FCE6B2]/10 pb-10">
-              <span className="text-xs tracking-widest font-body-jakarta text-[#D4613C] font-bold uppercase block mb-4">Display Principal / Kilimanjaro Sans (Syne)</span>
+              <span className="text-xs tracking-widest font-body-jakarta text-[#D4613C] font-bold uppercase block mb-4">Display Principal / Kilimanjaro Sans (Unbounded)</span>
               
               <div className="overflow-hidden py-4">
                 <motion.div 
-                  className="font-display-kilimanjaro text-white leading-none tracking-tight break-words select-all"
+                  className="font-display-kilimanjaro text-white leading-tight tracking-tight break-words select-all"
                   style={{ fontSize: `${fontSize}px` }}
                   layout
                 >
@@ -601,11 +504,11 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
               </div>
 
               <div className="flex flex-wrap gap-4 text-xs font-body-jakarta text-[#FCE6B2]/60 mt-6 uppercase">
-                <span>Display Serif/Sans</span>
+                <span>Display Sans</span>
                 <span>•</span>
-                <span>Bold & Expressive</span>
+                <span>Ultra-Heavy weight</span>
                 <span>•</span>
-                <span>Afro-Aesthetic Weight</span>
+                <span>African Geometric Concept</span>
               </div>
             </div>
 
@@ -634,7 +537,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
         </div>
       </section>
 
-      {/* THE MASTERPIECE: INTERACTIVE TURNTABLE VINYL PLAYER */}
+      {/* THE MASTERPIECE: INTERACTIVE TURNTABLE VINYL PLAYER (With Spotify Integration!) */}
       <section className="py-24 px-6 md:px-12 bg-[#0d0d0f] text-[#FCE6B2] border-t border-[#FCE6B2]/10 my-16 relative overflow-hidden">
         
         {/* Glow effect when playing */}
@@ -646,7 +549,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
             Vitrola Interativa.
           </h2>
           <p className="font-body-jakarta text-[#FCE6B2]/75 text-lg leading-relaxed">
-            Uma homenagem física e interativa às raízes sonoras do projeto. Passe o mouse para deslizar o disco, clique para levá-lo à vitrola e ligar o ruído quente de vinil analógico.
+            Uma homenagem física e interativa às raízes sonoras do projeto. Passe o mouse para deslizar o disco, clique para levá-lo à vitrola e ligar o ruído quente de vinil analógico. Aproveite para escutar a faixa original "Quem Chegou Primeiro" no Spotify do artista!
           </p>
         </div>
 
@@ -794,6 +697,22 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
           </div>
         </div>
 
+        {/* Premium Spotify and audio links */}
+        <div className="mt-8 flex flex-col items-center justify-center gap-4 relative z-10">
+          <a 
+            href="https://open.spotify.com/intl-pt/track/4Ofs1QBDXqGJMBxF9azCSn?si=48c187911014410f"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-3 bg-[#1DB954] hover:bg-[#1ed760] text-black font-body-jakarta px-8 py-4 rounded-full text-xs uppercase tracking-widest font-black shadow-2xl transition-all hover:scale-105"
+            data-cursor="hover"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.892-1.007-.334.074-.668-.137-.743-.472-.074-.334.137-.668.471-.742 3.853-.847 7.152-.466 9.822 1.17.295.18.387.563.203.844zm1.226-2.723c-.226.367-.707.487-1.074.26-2.717-1.67-6.86-2.154-10.063-1.183-.413.127-.85-.103-.977-.513-.127-.413.103-.85.513-.977 3.666-1.11 8.232-.573 11.34 1.34.367.227.487.708.26 1.073zm.105-2.833C14.462 8.762 8.784 8.574 5.51 9.566c-.502.152-1.03-.135-1.182-.638-.152-.502.135-1.03.638-1.182 3.77-1.144 10.024-.925 14.07 1.48.453.27.602.853.332 1.306-.27.453-.853.602-1.306.332z"/>
+            </svg>
+            Ouvir "Quem Chegou Primeiro" no Spotify →
+          </a>
+        </div>
+
         {/* Soundwave equalizer graph */}
         <AnimatePresence>
           {vinylState === "playing" && (
@@ -828,101 +747,73 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
 
       </section>
 
-      {/* MOCKUPS SHOWCASE (Tote bag / Street Banner) */}
-      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto space-y-16">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+      {/* MOCKUPS SHOWCASE (Stunning interactive cards featuring real photographed mockups!) */}
+      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div className="mb-16">
+          <span className="text-xs uppercase tracking-[0.3em] font-body-jakarta text-[#D4613C] font-bold block mb-4">ENTREGAS DE PROJETO</span>
+          <h2 className="font-brand-editorial text-4xl md:text-6xl text-[#FCE6B2] mb-6 leading-none">
+            Mockups e Aplicações.
+          </h2>
+          <p className="font-body-jakarta text-[#FCE6B2]/80 text-lg max-w-3xl leading-relaxed">
+            Veja as peças físicas desenvolvidas ganharem vida. Clique em qualquer aplicação para abrir o detalhe em alta definição e conferir os contrastes e a qualidade da serigrafia e wayfinding urbano.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
           
-          {/* Mockup 1: Tote Bag Typography Showcase */}
-          <div className="bg-[#90593B] border border-[#FCE6B2]/15 p-8 md:p-12 rounded-[3.5rem] flex flex-col justify-between min-h-[480px] overflow-hidden relative shadow-2xl group">
-            {/* Background vector canvas pattern */}
-            <div className="absolute inset-0 bg-[#0d0d0f]/10" />
-            <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#FCE6B2_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
-            
-            <div className="relative z-10 flex justify-between items-start">
-              <span className="text-[10px] tracking-widest font-bold uppercase text-white/60">Mockup 01 / Vestuário</span>
-              <span className="text-xs text-[#FCE6B2] uppercase font-body-jakarta">Tote Bag Algodão</span>
-            </div>
-
-            {/* High-Fidelity SVG canvas of the Tote Bag Mockup */}
-            <div className="relative z-10 flex-1 flex items-center justify-center py-8">
-              <motion.div 
-                whileHover={{ scale: 1.03 }}
-                className="w-[200px] h-[240px] bg-[#FCE6B2] border-2 border-amber-950 rounded-b-xl rounded-t-sm shadow-xl p-4 flex flex-col justify-between text-[#90593B] relative"
-              >
-                {/* Tote Bag straps */}
-                <div className="absolute -top-16 left-8 right-8 h-16 border-[4px] border-[#90593B]/75 border-b-0 rounded-t-full" />
-                
-                {/* Tote Bag Print */}
-                <div className="border border-[#90593B]/20 rounded-lg p-2 h-full flex flex-col justify-between">
-                  <span className="font-brand-editorial text-[9px] tracking-widest uppercase opacity-75">Jadiel Oliveira</span>
-                  
-                  <div className="text-center my-auto">
-                    <span className="font-display-kilimanjaro text-4xl block leading-none">KILI</span>
-                    <span className="text-[10px] tracking-[0.25em] font-body-jakarta font-bold block mt-1 uppercase text-[#D4613C]">MANJARO</span>
-                  </div>
-
-                  <div className="flex justify-between items-center text-[8px] opacity-60">
-                    <span>BAILE DIFERENTE</span>
-                    <span>© 2024</span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-
-            <p className="relative z-10 font-body-jakarta text-sm text-[#FCE6B2]/80 leading-relaxed max-w-md">
-              Aplicação de ecobag de algodão cru com impressão em serigrafia terracota, valorizando a robustez geométrica da tipografia Kilimanjaro.
-            </p>
-          </div>
-
-          {/* Mockup 2: Street Banner / Postes */}
-          <div className="bg-[#2C5E3B] border border-[#FCE6B2]/15 p-8 md:p-12 rounded-[3.5rem] flex flex-col justify-between min-h-[480px] overflow-hidden relative shadow-2xl group">
-            {/* Background visual graphics */}
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#FCE6B2_1.5px,transparent_1.5px)] [background-size:24px_24px] pointer-events-none" />
-
-            <div className="relative z-10 flex justify-between items-start">
-              <span className="text-[10px] tracking-widest font-bold uppercase text-white/60">Mockup 02 / Sinalização</span>
-              <span className="text-xs text-[#FCE6B2] uppercase font-body-jakarta">Banners de Rua</span>
-            </div>
-
-            {/* High-Fidelity Street Banner graphic */}
-            <div className="relative z-10 flex-1 flex items-center justify-center py-8">
-              <div className="relative flex gap-8">
-                {/* Iron lamp post line */}
-                <div className="absolute -top-10 bottom-0 left-[calc(50%-1px)] w-0.5 bg-zinc-700 pointer-events-none" />
-
-                {/* Banner 1 */}
-                <motion.div 
-                  whileHover={{ rotate: 1 }}
-                  className="w-[100px] h-[200px] bg-[#D4613C] border border-black/10 shadow-lg p-2.5 flex flex-col justify-between text-white rounded-sm origin-top"
-                >
-                  <span className="text-[6px] tracking-widest font-bold uppercase opacity-80">Jadiel Oliveira</span>
-                  <div className="text-center my-auto">
-                    <span className="font-display-kilimanjaro text-xl block leading-none">BAILE</span>
-                    <span className="font-brand-editorial text-[9px] tracking-widest block uppercase text-[#FCE6B2]">DIFERENTE</span>
-                  </div>
-                  <span className="text-[6px] tracking-widest block opacity-75">POSTE DE SINALIZAÇÃO</span>
-                </motion.div>
-
-                {/* Banner 2 */}
-                <motion.div 
-                  whileHover={{ rotate: -1 }}
-                  className="w-[100px] h-[200px] bg-[#FCE6B2] border border-black/10 shadow-lg p-2.5 flex flex-col justify-between text-[#2C5E3B] rounded-sm origin-top"
-                >
-                  <span className="text-[6px] tracking-widest font-bold uppercase opacity-80">Jadiel Oliveira</span>
-                  <div className="text-center my-auto">
-                    <span className="font-display-kilimanjaro text-xl block leading-none">OPARA</span>
-                    <span className="font-brand-editorial text-[9px] tracking-widest block uppercase text-[#D4613C]">SINFONIA</span>
-                  </div>
-                  <span className="text-[6px] tracking-widest block opacity-75">POSTE DE SINALIZAÇÃO</span>
-                </motion.div>
+          {/* Mockup 1: Eco Bag & Banners */}
+          <motion.div 
+            whileHover={{ y: -6 }}
+            onClick={() => setActiveImage(mockupEcobag)}
+            className="bg-[#0d0d0f] border border-[#FCE6B2]/10 rounded-[3rem] p-6 md:p-8 flex flex-col justify-between shadow-2xl group cursor-zoom-in min-h-[500px]"
+          >
+            <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-lg mb-6 bg-zinc-950">
+              <img 
+                src={mockupEcobag} 
+                alt="Mockup Eco bag algodão e Banner de rua" 
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"
+              />
+              <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute top-4 right-4 bg-black/85 backdrop-blur-sm border border-white/5 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Maximize2 className="w-4 h-4 text-[#FCE6B2]" />
               </div>
             </div>
+            
+            <div className="flex flex-col">
+              <span className="text-[10px] tracking-widest font-bold uppercase text-[#D4613C] font-body-jakarta">Mockup 01 / Sinalização & Ecologia</span>
+              <h3 className="font-brand-editorial text-2xl text-white mt-1">Eco Bag & Banners de Rua</h3>
+              <p className="font-body-jakarta text-sm text-[#FCE6B2]/70 mt-3 leading-relaxed">
+                A eco-bag em algodão cru estampa o monograma solar e poesia terracota. Banners urbanos verticais promovem a identidade nas principais vias públicas com alto contraste.
+              </p>
+            </div>
+          </motion.div>
 
-            <p className="relative z-10 font-body-jakarta text-sm text-[#FCE6B2]/80 leading-relaxed max-w-md">
-              Banners urbanos suspensos em postes metálicos duplos, promovendo o evento em via pública com as cores primárias do moodboard.
-            </p>
-          </div>
+          {/* Mockup 2: Turntable flatlay mockups */}
+          <motion.div 
+            whileHover={{ y: -6 }}
+            onClick={() => setActiveImage(mockupFlatlay)}
+            className="bg-[#0d0d0f] border border-[#FCE6B2]/10 rounded-[3rem] p-6 md:p-8 flex flex-col justify-between shadow-2xl group cursor-zoom-in min-h-[500px]"
+          >
+            <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-lg mb-6 bg-zinc-950">
+              <img 
+                src={mockupFlatlay} 
+                alt="Mockup Vitrola flatlay e capas de vinil" 
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"
+              />
+              <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute top-4 right-4 bg-black/85 backdrop-blur-sm border border-white/5 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Maximize2 className="w-4 h-4 text-[#FCE6B2]" />
+              </div>
+            </div>
+            
+            <div className="flex flex-col">
+              <span className="text-[10px] tracking-widest font-bold uppercase text-[#D4613C] font-body-jakarta">Mockup 02 / Merchandising Físico</span>
+              <h3 className="font-brand-editorial text-2xl text-white mt-1">Vitrola, CDs e Envelopes de Vinil</h3>
+              <p className="font-body-jakarta text-sm text-[#FCE6B2]/70 mt-3 leading-relaxed">
+                Flatlay completo do merchandising físico do Baile Diferente. Envelopes de vinil analógico em verde-musgo e terracota se unem ao design compacto das capas de CD e selos gravados.
+              </p>
+            </div>
+          </motion.div>
 
         </div>
       </section>
@@ -939,6 +830,32 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
           © 2026 GUSTAVO RANGEL • FEITO COM AMOR & MÚSICA
         </span>
       </footer>
+
+      {/* LIGHTBOX MODAL FOR REAL MEDIA */}
+      <AnimatePresence>
+        {activeImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveImage(null)}
+            className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4 md:p-10 cursor-zoom-out"
+          >
+            <motion.div 
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              className="relative max-w-7xl max-h-[90vh] overflow-hidden rounded-3xl"
+            >
+              <img 
+                src={activeImage} 
+                alt="Asset ampliado" 
+                className="w-full h-auto max-h-[85vh] object-contain"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </main>
   );
