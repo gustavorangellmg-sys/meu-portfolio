@@ -5,10 +5,14 @@ import { Link } from "@tanstack/react-router";
 import type { Project } from "@/lib/projects";
 
 // Import real project assets
-import heroImage from "@/assets/Proposta de imagem para a Hero (Jadiel Oliveira).png";
+import heroImage from "@/assets/hero-jadiel-novo.jpg";
 import originalMoodboard from "@/assets/media__1779744441303.png";
-import mockupEcobag from "@/assets/media__1779744441449.jpg";
-import mockupFlatlay from "@/assets/media__1779744441557.png";
+import mockupRealNovo from "@/assets/mockups-real-novo.jpg";
+import logoAtivo27 from "@/assets/Ativo 27.svg";
+import logoAtivo28 from "@/assets/Ativo 28.svg";
+import logoAtivo29 from "@/assets/Ativo 29.svg";
+import logoAtivo30 from "@/assets/Ativo 30.svg";
+import jadielAudio from "@/assets/audio-jadiel.webm";
 
 interface JadielProjectPageProps {
   project: Project;
@@ -43,81 +47,32 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
   // Vinyl Player State
   const [vinylState, setVinylState] = useState<"idle" | "slid-out" | "playing">("idle");
   const [vinylCrackle, setVinylCrackle] = useState<boolean>(false);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const noiseSourceRef = useRef<AudioBufferSourceNode | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Lightbox Modal State
   const [activeImage, setActiveImage] = useState<string | null>(null);
 
+  useEffect(() => {
+    audioRef.current = new Audio(jadielAudio);
+    audioRef.current.loop = true;
+  }, []);
+
   const startVinylSynth = () => {
-    try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      if (!AudioCtx) return;
-
-      const ctx = new AudioCtx();
-      audioCtxRef.current = ctx;
-
-      // Create a 2-second buffer of warm vinyl crackle sound
-      const bufferSize = ctx.sampleRate * 2;
-      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = buffer.getChannelData(0);
-
-      for (let i = 0; i < bufferSize; i++) {
-        // Soft white noise floor
-        let val = (Math.random() * 2 - 1) * 0.003;
-        
-        // Random popping impulses (vinyl pops)
-        if (Math.random() < 0.00018) {
-          val += (Math.random() * 2 - 1) * 0.12;
-        }
-        // Sub-bass rumble (turntable mechanical noise)
-        val += Math.sin(i * 0.005) * 0.001;
-
-        data[i] = val;
-      }
-
-      const source = ctx.createBufferSource();
-      source.buffer = buffer;
-      source.loop = true;
-
-      // Filter to create warm low-fidelity retro sound
-      const filter = ctx.createBiquadFilter();
-      filter.type = "bandpass";
-      filter.frequency.value = 650;
-      filter.Q.value = 1.2;
-
-      const gainNode = ctx.createGain();
-      gainNode.gain.setValueAtTime(0.35, ctx.currentTime);
-
-      source.connect(filter);
-      filter.connect(gainNode);
-      gainNode.connect(ctx.destination);
-
-      source.start(0);
-      noiseSourceRef.current = source;
+    if (audioRef.current) {
+      audioRef.current.play().catch(e => console.warn("Audio play blocked", e));
       setVinylCrackle(true);
-    } catch (e) {
-      console.warn("Web Audio bloqueado ou não suportado:", e);
     }
   };
 
   const stopVinylSynth = () => {
-    if (noiseSourceRef.current) {
-      try {
-        noiseSourceRef.current.stop();
-      } catch (err) {}
-      noiseSourceRef.current = null;
-    }
-    if (audioCtxRef.current) {
-      try {
-        audioCtxRef.current.close();
-      } catch (err) {}
-      audioCtxRef.current = null;
+    if (audioRef.current) {
+      audioRef.current.pause();
     }
     setVinylCrackle(false);
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     return () => {
       stopVinylSynth();
     };
@@ -150,10 +105,15 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
     <main ref={containerRef} className="bg-[#2C5E3B] text-[#FCE6B2] min-h-screen relative overflow-x-hidden selection:bg-[#D4613C] selection:text-white pb-32">
       {/* Dynamic Font Styling Injected into Component */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@300;400;500;700&family=Syne:wght@700;800&family=Unbounded:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@300;400;500;700&family=Syne:wght@700;800&display=swap');
         
+        @font-face {
+          font-family: 'Kilimanjaro Sans';
+          src: local('Kilimanjaro Sans');
+        }
+
         .font-display-kilimanjaro {
-          font-family: 'Unbounded', sans-serif;
+          font-family: 'Kilimanjaro Sans', 'Unbounded', sans-serif;
           font-weight: 900;
           letter-spacing: -0.04em;
         }
@@ -173,7 +133,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
       `}</style>
 
       {/* FLOATING HEADER */}
-      <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center mix-difference">
+      <nav className="absolute top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center mix-difference">
         <Link to="/projects" className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#FCE6B2] hover:opacity-75 transition-opacity" data-cursor="hover">
           <ArrowLeft className="w-4 h-4" />
           Projetos
@@ -184,7 +144,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
       </nav>
 
       {/* HERO SECTION - PREMIUM FULL SCREEN BACKGROUND (with contrast enhancements) */}
-      <section className="min-h-screen flex flex-col justify-between pt-36 px-6 md:px-12 pb-16 relative overflow-hidden">
+      <section className="min-h-screen flex flex-col justify-between pt-40 px-6 md:px-12 pb-16 relative overflow-hidden">
         {/* Cinematic full screen background photo of Jadiel Oliveira */}
         <motion.div 
           style={{ y: heroBgY }}
@@ -211,7 +171,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
           <h1 className="font-brand-editorial text-[13vw] md:text-[7.5vw] leading-[0.82] text-[#FCE6B2] tracking-tighter text-balance uppercase drop-shadow-2xl">
             Jadiel Oliveira
             <br />
-            <span className="text-[#D4613C] font-black">
+            <span className="text-[#D4613C]">
               Baile Diferente
             </span>
           </h1>
@@ -283,96 +243,19 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-stretch">
-          
-          {/* LOGO 1: JADIEL OLIVEIRA (High-fidelity inline styled brand logo) */}
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="lg:col-span-4 bg-[#FCE6B2] text-[#2C5E3B] p-8 rounded-[2.5rem] min-h-[340px] flex flex-col justify-between border border-[#FCE6B2]/10"
-          >
-            <span className="text-[10px] tracking-widest font-bold uppercase opacity-60">Logotipo Cursivo Padrão</span>
-            
-            <div className="flex-1 flex flex-col items-center justify-center py-6 text-center">
-              <motion.div 
-                className="font-brand-editorial text-4xl md:text-5xl text-[#2C5E3B] font-black uppercase tracking-tighter leading-[0.85] flex flex-col"
-                whileHover={{ scale: 1.05 }}
-              >
-                <span>Jadiel</span>
-                <span className="text-[#D4613C] text-5xl md:text-6xl font-display-kilimanjaro tracking-normal font-extrabold italic pl-3">Oliveira</span>
-              </motion.div>
-            </div>
-
-            <div className="flex justify-between items-center text-xs opacity-75 font-body-jakarta">
-              <span>ESTILO RÍTMICO</span>
-              <span>MARCA PRINCIPAL</span>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch mt-12">
+          <motion.div whileHover={{ scale: 1.02 }} className="bg-[#FCE6B2] p-8 rounded-[2.5rem] flex items-center justify-center min-h-[250px] shadow-xl">
+            <img src={logoAtivo27} alt="Logo Variation 1" className="w-full h-auto max-h-[180px] object-contain drop-shadow-md" />
           </motion.div>
-
-          {/* LOGO 2: Ó JADIEL OLIVEIRA CIRCULAR STAMP (Orange background, spinning on hover) */}
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="lg:col-span-5 bg-[#D4613C] text-[#FCE6B2] p-8 rounded-[2.5rem] min-h-[340px] flex flex-col justify-between border border-white/5 relative overflow-hidden group"
-          >
-            <span className="text-[10px] tracking-widest font-bold uppercase text-white/70">Selo Circular</span>
-
-            <div className="flex-1 flex items-center justify-center py-4 relative z-10">
-              <motion.div 
-                className="w-[180px] h-[180px]"
-                whileHover={{ rotate: 180 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              >
-                <svg className="w-full h-full" viewBox="0 0 200 200">
-                  <path id="circlePath" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" fill="none" />
-                  
-                  {/* Decorative rotating background sun */}
-                  <circle cx="100" cy="100" r="48" fill="#2C5E3B" opacity="0.3" />
-                  <text fill="#FCE6B2" className="font-brand-editorial text-[12.5px] tracking-[0.27em] uppercase">
-                    <textPath href="#circlePath" startOffset="0%">
-                      • Ó JADIEL OLIVEIRA • BAILE DIFERENTE •
-                    </textPath>
-                  </text>
-                  <text fill="#FCE6B2" className="font-display-kilimanjaro text-2xl font-black italic" x="100" y="107" textAnchor="middle">
-                    JADI
-                  </text>
-                </svg>
-              </motion.div>
-            </div>
-
-            <div className="flex justify-between items-center text-xs text-white/80 font-body-jakarta relative z-10">
-              <span>SELO ROTATIVO</span>
-              <span>ESTILO VINIL</span>
-            </div>
+          <motion.div whileHover={{ scale: 1.02 }} className="bg-[#D4613C] p-8 rounded-[2.5rem] flex items-center justify-center min-h-[250px] shadow-xl">
+            <img src={logoAtivo28} alt="Logo Variation 2" className="w-full h-auto max-h-[180px] object-contain drop-shadow-md" />
           </motion.div>
-
-          {/* LOGO 3: JADI MONOGRAMA (Recreated to match the 8-pointed star & clay semicircles from tote bag!) */}
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="lg:col-span-3 bg-[#90593B] text-[#FCE6B2] p-8 rounded-[2.5rem] min-h-[340px] flex flex-col justify-between border border-[#FCE6B2]/10"
-          >
-            <span className="text-[10px] tracking-widest font-bold uppercase opacity-60">Monograma Compacto</span>
-
-            <div className="flex-1 flex flex-col items-center justify-center py-6 gap-2">
-              <div className="relative w-28 h-28 flex items-center justify-center">
-                {/* Terracota half circles stacked */}
-                <div className="absolute inset-x-0 bottom-2 top-1/2 bg-[#D4613C] rounded-b-full opacity-90 border border-white/5" />
-                <div className="absolute inset-x-4 bottom-8 top-1/3 bg-[#D4613C]/40 rounded-t-full border border-white/5" />
-                
-                {/* 8-pointed star in primary green */}
-                <svg className="w-16 h-16 text-[#2C5E3B] relative z-10 drop-shadow-lg" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="16" cy="16" r="3" fill="#2C5E3B" />
-                  <path d="M16,2 L16,30 M2,16 L30,16 M6,6 L26,26 M6,26 L26,6" />
-                </svg>
-              </div>
-              
-              <span className="font-brand-editorial text-2xl uppercase tracking-widest mt-1">JADi</span>
-            </div>
-
-            <div className="flex justify-between items-center text-xs opacity-75 font-body-jakarta">
-              <span>SÍMBOLO INTEGRADO</span>
-              <span>ÍCONE SOLAR</span>
-            </div>
+          <motion.div whileHover={{ scale: 1.02 }} className="bg-[#90593B] p-8 rounded-[2.5rem] flex items-center justify-center min-h-[250px] shadow-xl">
+            <img src={logoAtivo29} alt="Logo Variation 3" className="w-full h-auto max-h-[180px] object-contain drop-shadow-md" />
           </motion.div>
-
+          <motion.div whileHover={{ scale: 1.02 }} className="bg-[#2C5E3B] p-8 rounded-[2.5rem] flex items-center justify-center min-h-[250px] shadow-xl">
+            <img src={logoAtivo30} alt="Logo Variation 4" className="w-full h-auto max-h-[180px] object-contain drop-shadow-md" />
+          </motion.div>
         </div>
       </section>
 
@@ -449,7 +332,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
                 Tipografia.
               </h2>
               <p className="font-body-jakarta text-[#FCE6B2]/85 text-base md:text-lg leading-relaxed">
-                Usamos a fonte **Kilimanjaro Sans** (aqui representada com toda a sua densidade e peso pela fonte **Unbounded**) como tipografia display expressiva e marcante nos títulos gerais. Para o suporte editorial, aplicamos a clássica **Helvetica Neue**.
+                Usamos a fonte **Kilimanjaro Sans** (aqui aplicada) como tipografia display expressiva e marcante nos títulos gerais. Para o suporte editorial, aplicamos a clássica **Helvetica Neue**.
               </p>
             </div>
 
@@ -491,7 +374,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
             
             {/* Display specimen */}
             <div className="border-b border-[#FCE6B2]/10 pb-10">
-              <span className="text-xs tracking-widest font-body-jakarta text-[#D4613C] font-bold uppercase block mb-4">Display Principal / Kilimanjaro Sans (Unbounded)</span>
+              <span className="text-xs tracking-widest font-body-jakarta text-[#D4613C] font-bold uppercase block mb-4">Display Principal / Kilimanjaro Sans</span>
               
               <div className="overflow-hidden py-4">
                 <motion.div 
@@ -759,58 +642,31 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+        <div className="grid grid-cols-1 gap-10 items-stretch">
           
-          {/* Mockup 1: Eco Bag & Banners */}
+          {/* Mockup 1: Real Mockups Collection */}
           <motion.div 
             whileHover={{ y: -6 }}
-            onClick={() => setActiveImage(mockupEcobag)}
-            className="bg-[#0d0d0f] border border-[#FCE6B2]/10 rounded-[3rem] p-6 md:p-8 flex flex-col justify-between shadow-2xl group cursor-zoom-in min-h-[500px]"
+            onClick={() => setActiveImage(mockupRealNovo)}
+            className="bg-[#0d0d0f] border border-[#FCE6B2]/10 rounded-[3rem] p-6 md:p-8 flex flex-col shadow-2xl group cursor-zoom-in min-h-[500px]"
           >
-            <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-lg mb-6 bg-zinc-950">
+            <div className="relative w-full rounded-2xl overflow-hidden shadow-lg mb-6 bg-zinc-950 aspect-[16/9] md:aspect-video">
               <img 
-                src={mockupEcobag} 
-                alt="Mockup Eco bag algodão e Banner de rua" 
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"
+                src={mockupRealNovo} 
+                alt="Mockup Collection Premium" 
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
               <div className="absolute top-4 right-4 bg-black/85 backdrop-blur-sm border border-white/5 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <Maximize2 className="w-4 h-4 text-[#FCE6B2]" />
               </div>
             </div>
             
-            <div className="flex flex-col">
-              <span className="text-[10px] tracking-widest font-bold uppercase text-[#D4613C] font-body-jakarta">Mockup 01 / Sinalização & Ecologia</span>
-              <h3 className="font-brand-editorial text-2xl text-white mt-1">Eco Bag & Banners de Rua</h3>
-              <p className="font-body-jakarta text-sm text-[#FCE6B2]/70 mt-3 leading-relaxed">
-                A eco-bag em algodão cru estampa o monograma solar e poesia terracota. Banners urbanos verticais promovem a identidade nas principais vias públicas com alto contraste.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Mockup 2: Turntable flatlay mockups */}
-          <motion.div 
-            whileHover={{ y: -6 }}
-            onClick={() => setActiveImage(mockupFlatlay)}
-            className="bg-[#0d0d0f] border border-[#FCE6B2]/10 rounded-[3rem] p-6 md:p-8 flex flex-col justify-between shadow-2xl group cursor-zoom-in min-h-[500px]"
-          >
-            <div className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-lg mb-6 bg-zinc-950">
-              <img 
-                src={mockupFlatlay} 
-                alt="Mockup Vitrola flatlay e capas de vinil" 
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"
-              />
-              <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-500" />
-              <div className="absolute top-4 right-4 bg-black/85 backdrop-blur-sm border border-white/5 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Maximize2 className="w-4 h-4 text-[#FCE6B2]" />
-              </div>
-            </div>
-            
-            <div className="flex flex-col">
-              <span className="text-[10px] tracking-widest font-bold uppercase text-[#D4613C] font-body-jakarta">Mockup 02 / Merchandising Físico</span>
-              <h3 className="font-brand-editorial text-2xl text-white mt-1">Vitrola, CDs e Envelopes de Vinil</h3>
-              <p className="font-body-jakarta text-sm text-[#FCE6B2]/70 mt-3 leading-relaxed">
-                Flatlay completo do merchandising físico do Baile Diferente. Envelopes de vinil analógico em verde-musgo e terracota se unem ao design compacto das capas de CD e selos gravados.
+            <div className="flex flex-col text-center items-center">
+              <span className="text-[10px] tracking-widest font-bold uppercase text-[#D4613C] font-body-jakarta">Mockup Premium / Merchandising Físico</span>
+              <h3 className="font-brand-editorial text-3xl text-white mt-2">Identidade Visual & Aplicações</h3>
+              <p className="font-body-jakarta text-base text-[#FCE6B2]/70 mt-4 leading-relaxed max-w-2xl mx-auto">
+                Uma visão abrangente de como a identidade visual do Baile Diferente se comporta no mundo físico. Das texturas e serigrafias aos envelopes de vinil, cada mockup é meticulosamente pensado para gerar valor.
               </p>
             </div>
           </motion.div>
