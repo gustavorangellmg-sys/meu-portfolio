@@ -7,12 +7,12 @@ import type { Project } from "@/lib/projects";
 // Import real project assets
 import heroImage from "@/assets/hero-jadiel-novo.jpg";
 import originalMoodboard from "@/assets/media__1779744441303.png";
-import mockupRealNovo from "@/assets/mockups-real-novo.jpg";
+import mockupRealNovo from "@/assets/media__1779744441557.png";
 import logoAtivo27 from "@/assets/Ativo 27.svg";
 import logoAtivo28 from "@/assets/Ativo 28.svg";
 import logoAtivo29 from "@/assets/Ativo 29.svg";
 import logoAtivo30 from "@/assets/Ativo 30.svg";
-import jadielAudio from "@/assets/audio-jadiel.webm";
+import jadielAudio from "@/assets/Jadiel Oliveira, André Freitas, Donatinho, Erick Pontes, Felipe Pizzutiello, Tuto Ferraz - A Música.mp3";
 
 interface JadielProjectPageProps {
   project: Project;
@@ -115,7 +115,8 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
         .font-display-kilimanjaro {
           font-family: 'Kilimanjaro Sans', 'Unbounded', sans-serif;
           font-weight: 900;
-          letter-spacing: -0.04em;
+          letter-spacing: -0.01em;
+          line-height: 1.25;
         }
         .font-brand-editorial {
           font-family: 'Bricolage Grotesque', sans-serif;
@@ -203,13 +204,13 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
         {/* Interactive moodboard container */}
         <motion.div 
           whileHover={{ scale: 1.01 }}
-          className="relative rounded-[2.5rem] overflow-hidden border border-[#FCE6B2]/15 shadow-2xl bg-zinc-950 group cursor-zoom-in"
+          className="relative rounded-[2.5rem] overflow-hidden border border-[#FCE6B2]/15 shadow-2xl bg-zinc-950 group cursor-zoom-in max-w-3xl mx-auto"
           onClick={() => setActiveImage(originalMoodboard)}
         >
           <img 
             src={originalMoodboard} 
             alt="Moodboard Original do Projeto Baile Diferente" 
-            className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
+            className="w-full max-h-[450px] object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none" />
           
@@ -378,7 +379,7 @@ export function JadielProjectPage({ project: p }: JadielProjectPageProps) {
               
               <div className="overflow-hidden py-4">
                 <motion.div 
-                  className="font-display-kilimanjaro text-white leading-tight tracking-tight break-words select-all"
+                  className="font-display-kilimanjaro text-white break-words select-all"
                   style={{ fontSize: `${fontSize}px` }}
                   layout
                 >
