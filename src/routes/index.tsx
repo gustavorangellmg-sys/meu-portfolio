@@ -52,10 +52,10 @@ import tatiCircular from "@/assets/PodTá ou Tati Arruda/O que é Economia Circu
 import tatiQuem from "@/assets/PodTá ou Tati Arruda/Quem é a Tatiane.png";
 import tatiRotina from "@/assets/PodTá ou Tati Arruda/Rotina de uma Mulher Multi.png";
 
-// Assets Della Brianza
-import dellaTirolez from "@/assets/Della Brianza/Della - Tirolez.mov";
-import dellaEntrada from "@/assets/Della Brianza/Della - Montagem entrada (2).mov";
-import dellaPremiacoes from "@/assets/Della Brianza/Premiações - Della.mov";
+// Assets Della Brianza — vídeos servidos via public/ para evitar limite de 25MB do Cloudflare
+const dellaTirolez = "/videos/della-tirolez.mp4";
+const dellaEntrada = "/videos/della-entrada.mp4";
+const dellaPremiacoes = "/videos/della-premiacoes.mp4";
 import dellaLogo from "@/assets/Della Brianza/Logo - Della Brianza.png";
 
 export const Route = createFileRoute("/")({
