@@ -26,9 +26,10 @@ src/assets/**/*.mov
 src/assets/**/*.avi
 src/assets/**/*.mkv
 
-# Videos in public/ (large files, served separately — exceeds Cloudflare 25MB limit)
+# Large media files in public/ (served statically, not bundled — excludes Cloudflare 25MB limit)
 public/videos/
 public/docs/
+public/images/
 
 # Editor directories and files
 .vscode/*

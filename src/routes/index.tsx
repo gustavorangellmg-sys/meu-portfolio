@@ -27,8 +27,9 @@ import {
 // Assets hero & Jadiel
 import heroVideo from "@/assets/hero-bg-scroll.mp4";
 import heroJadiel from "@/assets/hero-jadiel-novo.jpg";
-import mockupJadiel from "@/assets/media__1779744441557.png";
-import moodboardJadiel from "@/assets/media__1779744441303.png";
+// Jadiel mockup images served from public/ to avoid Cloudflare 25MB bundle limit
+const mockupJadiel = "/images/jadiel/mockup.jpg";
+const moodboardJadiel = "/images/jadiel/moodboard.jpg";
 import logoAtivo27 from "@/assets/Ativo 27.svg";
 import logoAtivo28 from "@/assets/Ativo 28.svg";
 import logoAtivo29 from "@/assets/Ativo 29.svg";
@@ -36,7 +37,8 @@ import logoAtivo30 from "@/assets/Ativo 30.svg";
 import jadielAudio from "@/assets/Jadiel Oliveira, André Freitas, Donatinho, Erick Pontes, Felipe Pizzutiello, Tuto Ferraz - A Música.mp3";
 
 // Assets Fornalha
-import fornalhaGuia from "@/assets/Fornalha da Guilda - IDV/Guia de marca completo - Fornalha da guilda - extraia imagens dessa imagem para compor.png";
+// Fornalha guide (10MB PNG) served from public/ as compressed JPEG
+const fornalhaGuia = "/images/fornalha/guia-fornalha.jpg";
 import fornalhaThumb from "@/assets/fornalha.jpg";
 
 // Assets Starbrick — Links externos de download (Evita o limite de 25MB da Cloudflare)
@@ -46,12 +48,13 @@ const pdfMyIn = "https://drive.google.com/drive/folders/1l-aOKrDcDRTLRsl2gprJZR_
 const pdfRiviera = "https://drive.google.com/drive/folders/1l-aOKrDcDRTLRsl2gprJZR_kZp1OFfpU?usp=sharing";    // Link da pasta compartilhada
 
 // Assets Podtá / Tati Arruda
-import tatiDor from "@/assets/PodTá ou Tati Arruda/A dor de começar do zero.png";
-import tatiDecisoes from "@/assets/PodTá ou Tati Arruda/Como lidar com as decisões difíceis que só o dono toma_.png";
-import tatiTweet from "@/assets/PodTá ou Tati Arruda/Frase de impacto de um convidado em formato de _tweet_ (imagem simples)_.png";
-import tatiCircular from "@/assets/PodTá ou Tati Arruda/O que é Economia Circular.png";
-import tatiQuem from "@/assets/PodTá ou Tati Arruda/Quem é a Tatiane.png";
-import tatiRotina from "@/assets/PodTá ou Tati Arruda/Rotina de uma Mulher Multi.png";
+// PodTá / Tati Arruda images served from public/ as compressed JPEGs (were 6–9MB PNGs)
+const tatiDor = "/images/podta/A-dor-de-come-ar-do-zero.jpg";
+const tatiDecisoes = "/images/podta/Como-lidar-com-as-decis-es-dif-ceis-que-s--o-dono-toma_.jpg";
+const tatiTweet = "/images/podta/Frase-de-impacto-de-um-convidado-em-formato-de-_tweet_--imagem-simples-_.jpg";
+const tatiCircular = "/images/podta/O-que---Economia-Circular.jpg";
+const tatiQuem = "/images/podta/Quem---a-Tatiane.jpg";
+const tatiRotina = "/images/podta/Rotina-de-uma-Mulher-Multi.jpg";
 
 // Assets Della Brianza — vídeos servidos via public/ para evitar limite de 25MB do Cloudflare
 const dellaTirolez = "/videos/della-tirolez.mp4";
