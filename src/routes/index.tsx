@@ -40,10 +40,10 @@ import fornalhaGuia from "@/assets/Fornalha da Guilda - IDV/Guia de marca comple
 import fornalhaThumb from "@/assets/fornalha.jpg";
 
 // Assets Starbrick — Links externos de download (Evita o limite de 25MB da Cloudflare)
-// Cole aqui os links de download direto do seu Google Drive, OneDrive ou Dropbox!
-const pdfStarbrick = "#"; // Link para o Manual StarBrick Principal
-const pdfMyIn = "#";       // Link para o Manual My In
-const pdfRiviera = "#";    // Link para o Manual Riviera Dolce Vita
+// Assets Starbrick — Links externos de download (Evita o limite de 25MB da Cloudflare)
+const pdfStarbrick = "https://drive.google.com/drive/folders/1l-aOKrDcDRTLRsl2gprJZR_kZp1OFfpU?usp=sharing"; // Link da pasta compartilhada
+const pdfMyIn = "https://drive.google.com/drive/folders/1l-aOKrDcDRTLRsl2gprJZR_kZp1OFfpU?usp=sharing";       // Link da pasta compartilhada
+const pdfRiviera = "https://drive.google.com/drive/folders/1l-aOKrDcDRTLRsl2gprJZR_kZp1OFfpU?usp=sharing";    // Link da pasta compartilhada
 
 // Assets Podtá / Tati Arruda
 import tatiDor from "@/assets/PodTá ou Tati Arruda/A dor de começar do zero.png";
