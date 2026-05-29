@@ -26,6 +26,9 @@ src/assets/**/*.mov
 src/assets/**/*.avi
 src/assets/**/*.mkv
 
+# PDFs — too large for Cloudflare 25MB asset limit, use external links instead
+src/assets/**/*.pdf
+
 # Large media files in public/ (served statically, not bundled — excludes Cloudflare 25MB limit)
 public/videos/
 public/docs/
