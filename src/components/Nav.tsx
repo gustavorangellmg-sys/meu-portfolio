@@ -2,8 +2,9 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 const items = [
-  { to: "/", label: "Index" },
-  { to: "/projects", label: "Projetos" },
+  { to: "/", hash: "top", label: "Index" },
+  { to: "/", hash: "identidades-visuais", label: "Identidades" },
+  { to: "/", hash: "social-media", label: "Social Media" },
   { to: "/about", label: "Sobre" },
   { to: "/contact", label: "Contato" },
 ];
@@ -24,8 +25,9 @@ export function Nav() {
           <nav className="hidden gap-8 md:flex">
             {items.map((i) => (
               <Link
-                key={i.to}
+                key={i.label}
                 to={i.to}
+                hash={i.hash}
                 className="group relative inline-block overflow-hidden text-sm uppercase tracking-widest text-paper"
               >
                 <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover:-translate-y-full">
@@ -58,10 +60,12 @@ export function Nav() {
         <nav className="flex flex-col gap-2">
           {items.map((i, idx) => (
             <Link
-              key={i.to}
+              key={i.label}
               to={i.to}
-              className="font-display text-[14vw] leading-none text-foreground"
+              hash={i.hash}
+              className="font-display text-[12vw] leading-none text-foreground"
               style={{ transitionDelay: `${idx * 60}ms` }}
+              onClick={() => setOpen(false)}
             >
               {i.label}
             </Link>
