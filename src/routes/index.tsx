@@ -39,10 +39,10 @@ import jadielAudio from "@/assets/Jadiel Oliveira, André Freitas, Donatinho, Er
 import fornalhaGuia from "@/assets/Fornalha da Guilda - IDV/Guia de marca completo - Fornalha da guilda - extraia imagens dessa imagem para compor.png";
 import fornalhaThumb from "@/assets/fornalha.jpg";
 
-// Assets Starbrick
-import pdfStarbrick from "@/assets/StarBrick e submarcas/Manual de marca - StarBrick (2).pdf";
-import pdfMyIn from "@/assets/StarBrick e submarcas/Manual de marca - My In.pdf";
-import pdfRiviera from "@/assets/StarBrick e submarcas/Riviera manual de marca.pdf";
+// Assets Starbrick — PDFs servidos via public/docs/ para evitar limite de 25MB do Cloudflare
+const pdfStarbrick = "/docs/manual-starbrick.pdf";
+const pdfMyIn = "/docs/manual-myin.pdf";
+const pdfRiviera = "/docs/manual-riviera.pdf";
 
 // Assets Podtá / Tati Arruda
 import tatiDor from "@/assets/PodTá ou Tati Arruda/A dor de começar do zero.png";
