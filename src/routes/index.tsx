@@ -39,10 +39,11 @@ import jadielAudio from "@/assets/Jadiel Oliveira, André Freitas, Donatinho, Er
 import fornalhaGuia from "@/assets/Fornalha da Guilda - IDV/Guia de marca completo - Fornalha da guilda - extraia imagens dessa imagem para compor.png";
 import fornalhaThumb from "@/assets/fornalha.jpg";
 
-// Assets Starbrick — PDFs servidos via public/docs/ para evitar limite de 25MB do Cloudflare
-const pdfStarbrick = "/docs/manual-starbrick.pdf";
-const pdfMyIn = "/docs/manual-myin.pdf";
-const pdfRiviera = "/docs/manual-riviera.pdf";
+// Assets Starbrick — Links externos de download (Evita o limite de 25MB da Cloudflare)
+// Cole aqui os links de download direto do seu Google Drive, OneDrive ou Dropbox!
+const pdfStarbrick = "#"; // Link para o Manual StarBrick Principal
+const pdfMyIn = "#";       // Link para o Manual My In
+const pdfRiviera = "#";    // Link para o Manual Riviera Dolce Vita
 
 // Assets Podtá / Tati Arruda
 import tatiDor from "@/assets/PodTá ou Tati Arruda/A dor de começar do zero.png";
@@ -581,7 +582,8 @@ function Home() {
                       <a 
                         key={idx}
                         href={manual.file} 
-                        download
+                        target={manual.file !== "#" ? "_blank" : undefined}
+                        rel="noopener noreferrer"
                         className="flex flex-col justify-between p-4 bg-slate-900/60 backdrop-blur border border-slate-800 rounded-2xl hover:border-sky-400/50 hover:bg-slate-900 transition-all text-left group"
                       >
                         <BookOpen className="w-5 h-5 text-sky-300 group-hover:scale-110 transition-transform mb-4" />
@@ -590,7 +592,7 @@ function Home() {
                           <p className="text-[10px] text-slate-400 font-jakarta mt-1 leading-tight">{manual.desc}</p>
                         </div>
                         <span className="inline-flex items-center gap-1 text-[9px] uppercase tracking-wider font-bold text-sky-400 mt-4">
-                          <Download className="w-3 h-3" /> PDF
+                          <Download className="w-3 h-3" /> VER PDF
                         </span>
                       </a>
                     ))}
