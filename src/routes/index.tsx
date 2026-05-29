@@ -304,29 +304,29 @@ function Home() {
             <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>Visuais</span>
           </h2>
           <p className="mt-6 max-w-2xl text-muted-foreground text-sm md:text-base font-jakarta leading-relaxed">
-            Sistemas gráficos modulares e sensoriais construídos para traduzir o invisível em marcas físicas imponentes, sofisticadas e com forte direcionamento de arte.
+            Sistemas gráficos modulares e sensoriais construídos para traduzir o invisível em marcas físicas imponentes, sofisticadas.
           </p>
         </div>
 
         {/* 1.1 JADIEL OLIVEIRA */}
         <ScrollSectionWrapper>
-          <div className="bg-[#2C5E3B] text-[#FCE6B2] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-20 overflow-hidden shadow-2xl relative">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4613C]/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="bg-[#2C5E3B] text-[#FCE6B2] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-24 overflow-hidden shadow-2xl relative">
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#D4613C]/10 rounded-full blur-[140px] pointer-events-none" />
             
             <div className="grid gap-12 lg:grid-cols-12 items-start relative z-10">
               {/* Left text column */}
               <div className="lg:col-span-5 space-y-8">
                 <div className="flex items-center gap-3">
-                  <span className="bg-[#D4613C] text-white px-3 py-1 rounded-full text-[10px] font-jakarta font-bold uppercase tracking-wider">Identidade Visual</span>
-                  <span className="text-xs tracking-widest uppercase font-bold text-white">2024</span>
+                  <span className="bg-[#D4613C] text-white px-3 py-1 rounded-full text-[10px] font-jakarta font-bold uppercase tracking-wider">Identidade Visual & Curadoria</span>
+                  <span className="text-xs tracking-widest uppercase font-bold text-white/80">2024</span>
                 </div>
 
-                <h3 className="font-brand text-5xl md:text-7xl leading-[0.9] text-white uppercase tracking-tighter">
+                <h3 className="font-brand text-6xl md:text-8xl leading-[0.85] text-white uppercase tracking-tighter">
                   Jadiel Oliveira <br/>
                   <span className="text-[#D4613C] italic font-normal font-sans">Baile Diferente</span>
                 </h3>
 
-                <p className="font-jakarta text-white/95 text-base md:text-lg leading-relaxed text-balance">
+                <p className="font-jakarta text-white/90 text-base md:text-lg leading-relaxed text-balance">
                   Artista e curador sonoro extraordinário, Jadiel demandava uma representação que vibrasse livremente entre o erudito e o popular. Inspirada na expressividade da cena acústica africana urbana e em Miró, nasceu uma identidade visual de ritmo livre e marcante.
                 </p>
 
@@ -470,129 +470,223 @@ function Home() {
           </div>
         </ScrollSectionWrapper>
 
-        {/* 1.2 A FORNALHA DA GUILDA */}
+        {/* 1.2 A FORNALHA DA GUILDA — HAMBURGUERIA FÍSICA PREMIUM COM ESTÉTICA DE RPG */}
         <ScrollSectionWrapper>
-          <div className="bg-[#141416] text-[#e4e4e7] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-20 border border-zinc-800 overflow-hidden shadow-2xl relative">
-            <div className="absolute -right-20 -top-20 w-[400px] h-[400px] bg-amber-600/10 rounded-full blur-[100px] pointer-events-none" />
+          <div className="bg-[#0f0e13] text-[#e4e4e7] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-24 border border-amber-900/30 overflow-hidden shadow-2xl relative">
+            {/* Skeuomorphic visual details in background */}
+            <div className="absolute -left-20 -bottom-20 w-[500px] h-[500px] bg-[#d97706]/5 rounded-full blur-[130px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
             
-            <div className="grid gap-12 lg:grid-cols-12 items-center">
-              {/* Image Grid / Showcase */}
+            <div className="grid gap-12 lg:grid-cols-12 items-center relative z-10">
+              
+              {/* Text / Copy Column on the Left for Variation */}
+              <div className="lg:col-span-6 space-y-8 lg:pr-6">
+                <div className="flex items-center gap-3">
+                  <span className="bg-gradient-to-r from-amber-600 to-[#d97706] text-black font-jakarta font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Identidade Completa & Ambientação</span>
+                  <span className="text-xs tracking-widest uppercase font-bold text-amber-500/80">2025</span>
+                </div>
+
+                <div className="space-y-4">
+                  <span className="text-xs uppercase tracking-[0.3em] text-amber-500 font-bold font-jakarta block">// PROJETO DE MARCA & EMBALAGEM</span>
+                  <h3 className="font-brand text-6xl md:text-7xl leading-[0.85] text-white uppercase tracking-tighter">
+                    Fornalha <br/>
+                    <span className="text-transparent" style={{ WebkitTextStroke: "1px #d97706" }}>da Guilda</span>
+                  </h3>
+                </div>
+
+                <p className="font-jakarta text-zinc-300 text-base md:text-lg leading-relaxed text-balance">
+                  A **Fornalha da Guilda** não é um food truck comum. Trata-se de uma **hamburgueria física de alto nível conceitual** que une a gastronomia rústica a uma experiência de RPG de alta fantasia. 
+                  <br/><br/>
+                  A marca foi desenhada com a robustez e o requinte de uma forja antiga. O cardápio funciona como uma **ficha de personagem**, as brochuras se dividem pelas classes clássicas (Guerreiro, Mago, Ladino) e a ambientação utiliza cobre envelhecido, selos de cera autênticos e ilustrações medievais gravadas a ácido.
+                </p>
+
+                {/* RPG Characteristics Grid */}
+                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-zinc-800">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Flame className="w-4 h-4 text-amber-500" />
+                      <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-bold font-jakarta">A Taverna</span>
+                    </div>
+                    <p className="text-xs text-zinc-500 leading-normal">Espaço físico imersivo que evoca tabernas lendárias de alta fantasia.</p>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Shield className="w-4 h-4 text-amber-500" />
+                      <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-bold font-jakarta">O Selo</span>
+                    </div>
+                    <p className="text-xs text-zinc-500 leading-normal">Escudo heráldico forjado a ferro e cera vermelha nos lacres.</p>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Layers className="w-4 h-4 text-amber-500" />
+                      <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-bold font-jakarta">Grimório</span>
+                    </div>
+                    <p className="text-xs text-zinc-500 leading-normal">Menus e embalagens impressas em papéis kraft rústicos texturizados.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* RPG-Inspired Brand Elements Interactive Deck */}
               <div className="lg:col-span-6 space-y-6">
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-zinc-800 aspect-[4/3]">
+                
+                {/* Main Hero Emblem Showcase with Medieval border framing */}
+                <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-2 border-amber-900/40 aspect-[4/3] group bg-black/60">
                   <img 
                     src={fornalhaGuia} 
-                    alt="Guia de Marca Fornalha da Guilda" 
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    alt="Identidade Visual Fornalha da Guilda" 
+                    className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:scale-102 transition-all duration-700 cursor-zoom-in"
+                    onClick={() => setActiveImage(fornalhaGuia)}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent pointer-events-none" />
+                  
+                  {/* Skeuomorphic tag on top-left */}
+                  <div className="absolute top-4 left-4 bg-amber-950/90 border border-amber-500/30 px-3.5 py-1.5 rounded-full backdrop-blur-md">
+                    <span className="text-[9px] uppercase tracking-widest font-black text-amber-400 font-jakarta flex items-center gap-1.5">
+                      <Shield className="w-3.5 h-3.5" /> Escudo da Forja • IDV
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
                     <div>
-                      <span className="text-[10px] tracking-widest uppercase text-amber-500 font-bold">Guia de Marca Completo</span>
-                      <h4 className="font-brand text-2xl text-white mt-1">Cores, Escudo & Grimório</h4>
+                      <span className="text-[10px] tracking-widest uppercase text-amber-500 font-bold">Guia Heráldico Completo</span>
+                      <h4 className="font-brand text-2xl text-white mt-1">Manual de Logotipos & Ilustrações</h4>
                     </div>
                     <button 
                       onClick={() => setActiveImage(fornalhaGuia)}
-                      className="bg-black/80 hover:bg-black p-3 rounded-full text-white transition-colors"
+                      className="bg-amber-600 hover:bg-amber-500 text-black p-3.5 rounded-full transition-transform duration-300 hover:scale-115"
                     >
                       <Maximize2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
 
-                {/* Sub row showing food truck layout */}
-                <div className="relative rounded-2xl overflow-hidden border border-zinc-800 h-[150px]">
-                  <img src={fornalhaThumb} alt="Fornalha Foodtruck" className="w-full h-full object-cover brightness-[0.7] grayscale hover:grayscale-0 transition-all duration-700" />
-                  <div className="absolute inset-0 bg-black/45 flex items-center justify-center p-4">
-                    <p className="text-xs text-center font-jakarta text-white/80 leading-relaxed italic">
-                      "Comer na Fornalha é mais do que jantar, é embarcar em uma verdadeira campanha medieval de RPG."
+                {/* Sub row showing Tavern detail & copy */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="relative rounded-3xl overflow-hidden border border-zinc-800 h-[140px] group cursor-zoom-in" onClick={() => setActiveImage(fornalhaThumb)}>
+                    <img src={fornalhaThumb} alt="Fornalha Hamburgueria" className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-amber-950/20 group-hover:bg-transparent transition-colors" />
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-[8px] uppercase tracking-widest text-amber-400 font-bold block">A Taverna Física</span>
+                      <span className="text-xs text-white font-bold">Fotografia do Ponto</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#141416] border border-zinc-800 p-5 rounded-3xl flex flex-col justify-between h-[140px]">
+                    <div className="flex gap-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Sparkles key={star} className="w-3 h-3 text-amber-500" />
+                      ))}
+                    </div>
+                    <p className="text-[11px] font-jakarta text-zinc-400 leading-relaxed italic">
+                      "Desenvolvemos toda a atmosfera do local para que o cliente se sinta um herói de sua própria campanha ao cruzar as portas."
                     </p>
+                    <span className="text-[9px] uppercase tracking-widest text-zinc-500 font-bold">— DIRETRIZES DE ARTESANATO CRÍTICO</span>
                   </div>
                 </div>
+
               </div>
 
-              {/* Text / Copy Column */}
-              <div className="lg:col-span-6 space-y-8">
-                <div className="flex items-center gap-3">
-                  <span className="bg-amber-600 text-white px-3 py-1 rounded-full text-[10px] font-jakarta font-bold uppercase tracking-wider">Branding & Embalagem</span>
-                  <span className="text-xs tracking-widest uppercase font-bold text-zinc-500">2025</span>
-                </div>
-
-                <h3 className="font-brand text-5xl md:text-7xl leading-[0.9] text-white uppercase tracking-tighter">
-                  A Fornalha <br/>
-                  <span className="text-amber-500 italic font-normal font-sans">da Guilda</span>
-                </h3>
-
-                <p className="font-jakarta text-zinc-300 text-base md:text-lg leading-relaxed text-balance">
-                  Um food truck com o coração fincado no universo de RPG e alta fantasia precisava de mais do que apenas um logo bonito. Criamos uma marca com o peso e a textura de uma armadura medieval. O cardápio funciona como uma verdadeira ficha de personagem, brochuras divididas por classes (Guerreiro, Mago, Ladino) agem como menus e peças de colecionador, e a paleta em cobre martelado e azul-aço evoca a nobreza de uma forja antiga.
-                </p>
-
-                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-zinc-800">
-                  <div className="space-y-1">
-                    <Flame className="w-5 h-5 text-amber-500" />
-                    <h5 className="text-[11px] uppercase tracking-wider text-zinc-400 font-bold mt-2">Tom de Voz</h5>
-                    <p className="text-xs text-zinc-500 font-jakarta leading-normal">Lúdico, místico e acolhedor como uma taberna</p>
-                  </div>
-                  <div className="space-y-1">
-                    <Shield className="w-5 h-5 text-amber-500" />
-                    <h5 className="text-[11px] uppercase tracking-wider text-zinc-400 font-bold mt-2">Identidade</h5>
-                    <p className="text-xs text-zinc-500 font-jakarta leading-normal">Escudos de ferro, texturas rústicas e selos de cera</p>
-                  </div>
-                  <div className="space-y-1">
-                    <Layers className="w-5 h-5 text-amber-500" />
-                    <h5 className="text-[11px] uppercase tracking-wider text-zinc-400 font-bold mt-2">Materiais</h5>
-                    <p className="text-xs text-zinc-500 font-jakarta leading-normal">Papéis texturizados, gravuras metálicas e couro</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </ScrollSectionWrapper>
 
-        {/* 1.3 STARBRICK E SUBMARCAS */}
+        {/* 1.3 STARBRICK E SUBMARCAS — ARQUITETURA E INCORPORAÇÃO DE ALTO PADRÃO (RIVIERA & MY IN) */}
         <ScrollSectionWrapper>
-          <div className="bg-[#11161d] text-[#e2e8f0] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-20 border border-slate-800 overflow-hidden shadow-2xl relative">
-            <div className="absolute right-0 bottom-0 w-[450px] h-[450px] bg-sky-500/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="bg-[#0b0f14] text-[#e2e8f0] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-24 border border-sky-950/50 overflow-hidden shadow-2xl relative">
+            <div className="absolute right-0 bottom-0 w-[550px] h-[550px] bg-sky-500/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 left-10 w-[300px] h-[300px] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
             
-            <div className="grid gap-12 lg:grid-cols-12 items-center">
-              {/* Copy / Info */}
+            <div className="grid gap-12 lg:grid-cols-12 items-center relative z-10">
+              
+              {/* Image / Graphic Display Panel on the Left for Variation */}
+              <div className="lg:col-span-6 space-y-6">
+                <div className="bg-[#101720] border border-slate-800 rounded-[2.5rem] p-8 space-y-8 relative overflow-hidden shadow-inner">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-sky-400/5 rounded-full blur-2xl pointer-events-none" />
+                  
+                  <div className="space-y-2">
+                    <span className="text-[10px] tracking-widest font-bold text-sky-400 uppercase font-jakarta block">// PILAR CONCEITUAL</span>
+                    <h4 className="font-brand text-3xl text-white">Wellness & Geometria Pura</h4>
+                    <p className="text-xs text-slate-400 font-jakarta leading-relaxed">
+                      A arquitetura visual da StarBrick baseia-se na sofisticação do "menos é luxo". O design valoriza espaços vazios e harmônicos inspirados no minimalismo europeu.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-850 hover:border-sky-500/30 transition-all group">
+                      <div className="w-7 h-7 rounded-lg bg-sky-500/10 flex items-center justify-center mb-3">
+                        <Layers className="w-4 h-4 text-sky-400" />
+                      </div>
+                      <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold block">Riviera Dolce Vita</span>
+                      <p className="text-xs text-slate-500 font-jakarta mt-2 leading-relaxed group-hover:text-slate-350 transition-colors">
+                        Identidade visual baseada na brisa mediterrânea e na calmaria das marés, com tons de areia e azul sutil.
+                      </p>
+                    </div>
+
+                    <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-850 hover:border-emerald-500/30 transition-all group">
+                      <div className="w-7 h-7 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-3">
+                        <Sparkles className="w-4 h-4 text-emerald-400" />
+                      </div>
+                      <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold block">My In Interiores</span>
+                      <p className="text-xs text-slate-500 font-jakarta mt-2 leading-relaxed group-hover:text-slate-350 transition-colors">
+                        Design contemporâneo e sóbrio com foco em materiais brutos, concreto exposto e madeiras nobres.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 flex justify-center">
+                    <span className="inline-flex items-center gap-1.5 text-xs text-slate-400 bg-slate-950 px-4 py-2 border border-slate-850 rounded-full font-jakarta font-semibold select-none">
+                      <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+                      Harmonia, Equilíbrio e Pureza
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Copy / Info and Download Buttons on the Right */}
               <div className="lg:col-span-6 space-y-8">
                 <div className="flex items-center gap-3">
-                  <span className="bg-sky-750 border border-sky-400 text-sky-300 px-3 py-1 rounded-full text-[10px] font-jakarta font-bold uppercase tracking-wider">Alto Padrão & Incorporação</span>
+                  <span className="bg-sky-500/10 border border-sky-400/20 text-sky-400 px-3 py-1 rounded-full text-[10px] font-jakarta font-bold uppercase tracking-wider">Design de Alto Padrão • Real Estate</span>
                   <span className="text-xs tracking-widest uppercase font-bold text-slate-500">2026</span>
                 </div>
 
-                <h3 className="font-brand text-5xl md:text-7xl leading-[0.9] text-white uppercase tracking-tighter">
-                  Starbrick <br/>
-                  <span className="text-sky-300 font-light font-sans tracking-wide">Incorporações</span>
-                </h3>
+                <div className="space-y-4">
+                  <span className="text-xs uppercase tracking-[0.3em] text-sky-400 font-bold font-jakarta block">// BRANDING DE INCORPORAÇÃO</span>
+                  <h3 className="font-brand text-6xl md:text-8xl leading-[0.85] text-white uppercase tracking-tighter">
+                    Starbrick <br/>
+                    <span className="text-sky-400 italic font-normal font-sans">Incorporações</span>
+                  </h3>
+                </div>
 
                 <p className="font-jakarta text-slate-300 text-base md:text-lg leading-relaxed text-balance">
-                  Como uma construtora e incorporadora de altíssimo padrão, a premissa conceitual da Starbrick está visceralmente atada ao bem-estar e à qualidade de vida absoluta. Essa assinatura reflete-se com imponência no empreendimento **Riviera Dolce Vita** (uma simbiose perfeita entre luxo leve e natureza) e no **My In** (curadoria de arquitetura de interiores sob medida). O design gráfico adota caminhos geométricos limpos, muita sofisticação tipográfica e materiais tangíveis premium.
+                  Como uma incorporadora de altíssimo padrão, a premissa de marca da Starbrick e submarcas (**Riviera Dolce Vita** e **My In**) está visceralmente ligada à qualidade de vida absoluta. O design gráfico adota caminhos arquitetônicos limpos, tipografias requintadas de origem suíça e papéis texturizados de algodão puro.
+                  <br/><br/>
+                  Extraímos as essências conceituais de cada uma de suas subdivisões no portfólio, estruturando materiais físicos e manuais que refletem a nobreza de cada empreendimento de luxo.
                 </p>
 
+                {/* Shared Folder PDFs link wrapper */}
                 <div className="flex flex-col gap-3 pt-6 border-t border-slate-800">
-                  <h4 className="text-[11px] uppercase tracking-widest text-slate-400 font-bold font-jakarta">Manuais de Identidade (Arquivos de Projeto)</h4>
+                  <h4 className="text-[11px] uppercase tracking-widest text-slate-400 font-bold font-jakarta">Acesse os Manuais de Identidade Estruturados</h4>
                   
                   <div className="grid sm:grid-cols-3 gap-3">
                     {[
-                      { title: "StarBrick Institucional", desc: "Manual de Marca Principal", file: pdfStarbrick },
-                      { title: "Riviera Dolce Vita", desc: "Design do Empreendimento", file: pdfRiviera },
-                      { title: "My In Interiores", desc: "Manual de Curadoria", file: pdfMyIn },
+                      { title: "StarBrick Principal", desc: "Manual Institucional", file: pdfStarbrick },
+                      { title: "Riviera Dolce Vita", desc: "Design & Conceito", file: pdfRiviera },
+                      { title: "My In Interiores", desc: "Curadoria de Estilo", file: pdfMyIn },
                     ].map((manual, idx) => (
                       <a 
                         key={idx}
                         href={manual.file} 
-                        target={manual.file !== "#" ? "_blank" : undefined}
+                        target="_blank"
                         rel="noopener noreferrer"
-                        className="flex flex-col justify-between p-4 bg-slate-900/60 backdrop-blur border border-slate-800 rounded-2xl hover:border-sky-400/50 hover:bg-slate-900 transition-all text-left group"
+                        className="flex flex-col justify-between p-4 bg-slate-950/80 backdrop-blur border border-slate-850 rounded-2xl hover:border-sky-450 hover:bg-slate-950 transition-all text-left group"
                       >
-                        <BookOpen className="w-5 h-5 text-sky-300 group-hover:scale-110 transition-transform mb-4" />
+                        <BookOpen className="w-5 h-5 text-sky-400 group-hover:scale-110 transition-transform mb-4" />
                         <div>
                           <h5 className="text-xs font-bold text-white tracking-tight">{manual.title}</h5>
-                          <p className="text-[10px] text-slate-400 font-jakarta mt-1 leading-tight">{manual.desc}</p>
+                          <p className="text-[10px] text-slate-500 font-jakarta mt-1 leading-tight">{manual.desc}</p>
                         </div>
                         <span className="inline-flex items-center gap-1 text-[9px] uppercase tracking-wider font-bold text-sky-400 mt-4">
-                          <Download className="w-3 h-3" /> VER PDF
+                          <Download className="w-3 h-3" /> Acessar PDF
                         </span>
                       </a>
                     ))}
@@ -600,93 +694,70 @@ function Home() {
                 </div>
               </div>
 
-              {/* Graphic Display Panel */}
-              <div className="lg:col-span-6 flex flex-col justify-center">
-                <div className="bg-slate-900/80 border border-slate-800 rounded-[2.5rem] p-8 space-y-8 relative overflow-hidden shadow-2xl">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-sky-400/10 rounded-full blur-xl pointer-events-none" />
-                  
-                  <div className="space-y-2">
-                    <span className="text-[10px] tracking-widest font-bold text-sky-300 uppercase font-jakarta block">Conceito de Wellness</span>
-                    <h4 className="font-brand text-3xl text-white">Sofisticação Orgânica & Minimalista</h4>
-                  </div>
-
-                  <p className="text-sm font-jakarta text-slate-400 leading-relaxed">
-                    A base geométrica de Starbrick utiliza linhas limpas, espaços em branco generosos inspirados em arquitetura de museus e papéis texturizados de algodão para todos os materiais físicos entregues aos clientes de alto padrão.
-                  </p>
-
-                  <div className="border-t border-slate-800 pt-6 grid grid-cols-2 gap-4">
-                    <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                      <span className="text-[9px] uppercase tracking-widest text-slate-500 font-bold block">Riviera</span>
-                      <p className="text-xs text-slate-300 font-jakarta mt-1 leading-snug">Identidade baseada na brisa mediterrânea e na calmaria das marés.</p>
-                    </div>
-                    <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                      <span className="text-[9px] uppercase tracking-widest text-slate-500 font-bold block">My In</span>
-                      <p className="text-xs text-slate-300 font-jakarta mt-1 leading-snug">Design sóbrio que valoriza os materiais brutos de interiores.</p>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 flex justify-center">
-                    <span className="inline-flex items-center gap-1.5 text-xs text-slate-400 bg-slate-950 px-4 py-2 border border-slate-800 rounded-full font-jakarta font-semibold select-none">
-                      <Sparkles className="w-3.5 h-3.5 text-sky-300" />
-                      Wellness na Interação Visual
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </ScrollSectionWrapper>
       </section>
 
       {/* ==================== SEÇÃO 2: DESIGN ESTRATÉGICO INSTAGRAM ==================== */}
-      <section id="social-media" className="relative z-10 bg-paper text-ink pt-24 pb-12 rounded-[4rem]">
+      <section id="social-media" className="relative z-10 bg-[#0c0c0e] text-[#f4f4f5] pt-24 pb-12 rounded-[4rem] border-t border-zinc-900">
         <div className="px-5 md:px-10 mb-16">
-          <p className="text-xs uppercase tracking-[0.35em] text-primary mb-3">// VERTENTE 02</p>
-          <h2 className="font-display text-5xl md:text-8xl tracking-tighter leading-none uppercase text-zinc-950">
+          <p className="text-xs uppercase tracking-[0.35em] text-emerald-400 mb-3">// VERTENTE 02</p>
+          <h2 className="font-brand text-5xl md:text-8xl tracking-tighter leading-none uppercase text-white">
             Instagram &<br/>
-            <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(0,0,0,0.3)" }}>Social Media</span>
+            <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.2)" }}>Social Media</span>
           </h2>
-          <p className="mt-6 max-w-2xl text-zinc-600 text-sm md:text-base font-jakarta leading-relaxed">
+          <p className="mt-6 max-w-2xl text-zinc-400 text-sm md:text-base font-jakarta leading-relaxed">
             Direção criativa e criativos premium focados em atrair, reter e converter o público de alto padrão através de estética requintada e storytelling afiado.
           </p>
         </div>
 
-        {/* 2.1 PODTÁ / TATI ARRUDA */}
+        {/* 2.1 PODTÁ / TATI ARRUDA — MULTI-GRID EDITORIAL DE FOTOS E CARROSSEL INTERATIVO */}
         <ScrollSectionWrapper>
-          <div className="bg-[#141416] text-[#e4e4e7] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-20 overflow-hidden shadow-2xl relative border border-zinc-800">
-            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="bg-[#141416] text-[#e4e4e7] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-24 overflow-hidden shadow-2xl relative border border-zinc-800">
+            <div className="absolute top-0 left-0 w-[550px] h-[550px] bg-emerald-500/5 rounded-full blur-[130px] pointer-events-none" />
             
-            <div className="grid gap-12 lg:grid-cols-12 items-center">
-              {/* Text Copy */}
+            <div className="grid gap-12 lg:grid-cols-12 items-start relative z-10">
+              
+              {/* Text Copy & Social details on Left */}
               <div className="lg:col-span-5 space-y-8">
                 <div className="flex items-center gap-3">
-                  <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-[10px] font-jakarta font-bold uppercase tracking-wider">Social Media & Posicionamento</span>
+                  <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-[10px] font-jakarta font-bold uppercase tracking-wider">Estratégia de Feed & Direção de Arte</span>
                   <span className="text-xs tracking-widest uppercase font-bold text-zinc-500">2026</span>
                 </div>
 
-                <h3 className="font-brand text-5xl md:text-7xl leading-[0.9] text-white uppercase tracking-tighter">
+                <h3 className="font-brand text-6xl md:text-8xl leading-[0.85] text-white uppercase tracking-tighter">
                   Podtá / <br/>
                   <span className="text-emerald-400 italic font-normal font-sans">Tati Arruda</span>
                 </h3>
 
                 <p className="font-jakarta text-zinc-300 text-base md:text-lg leading-relaxed text-balance">
-                  Tati é uma empreendedora de frentes múltiplas: empresária, apresentadora, mãe de pet e defensora ativa da economia circular e sustentabilidade. No **PodTá**, ela constrói um espaço acolhedor e profundo que foge de fofocas ou jargões corporativos áridos para dar foco a histórias reais.
+                  Tati é uma empresária de frentes múltiplas: defensora da **economia circular**, empresária de moda e apresentadora de podcast. No **PodTá**, ela constrói narrativas profundas e descomplicadas.
                   <br/><br/>
-                  A identidade visual e os criativos construídos para seu Instagram utilizam um contraste editorial nítido, micro-layouts sofisticados e carrosséis com roteiros refinados que traduzem a sua atitude e dinamismo.
+                  Para o Instagram, projetamos um **micro-layout editorial arrojado**. Longe de blocos de textos monótonos, os criativos usam frases fortes em tipografia de impacto, carrosséis educativos dinâmicos e fotos de bastidores tratadas com grão analógico elegante.
                 </p>
 
-                <div className="pt-6 border-t border-zinc-800 flex justify-between items-center">
-                  <div className="flex items-center gap-1.5 text-xs text-zinc-400 font-jakarta">
-                    <Heart className="w-4 h-4 text-emerald-400" />
-                    <span>Mulher de várias frentes</span>
+                {/* Key Metrics or pillars block */}
+                <div className="space-y-4 pt-6 border-t border-zinc-800">
+                  <h4 className="text-xs uppercase tracking-[0.2em] text-emerald-400 font-bold">Pilares de Conteúdo do Feed</h4>
+                  <div className="grid grid-cols-2 gap-3 text-xs text-zinc-400 font-jakarta">
+                    <div className="bg-[#1c1c1e] p-4 rounded-xl border border-zinc-800">
+                      <span className="text-emerald-400 font-bold block mb-1">#EconomiaCircular</span>
+                      Educação sustentável descomplicada em formato carrossel.
+                    </div>
+                    <div className="bg-[#1c1c1e] p-4 rounded-xl border border-zinc-800">
+                      <span className="text-emerald-400 font-bold block mb-1">#MulherMulti</span>
+                      Rotina, insights reais e bastidores sem filtros.
+                    </div>
                   </div>
-                  <span className="text-xs text-emerald-400 font-bold uppercase tracking-widest">Sustentável & Humano</span>
                 </div>
               </div>
 
-              {/* Instagram Carousel Sandbox */}
-              <div className="lg:col-span-7 flex flex-col items-center">
-                <div className="bg-[#1c1c1e] border border-zinc-800 p-6 rounded-[2.5rem] w-full max-w-lg relative shadow-2xl flex flex-col">
+              {/* Instagram Feed Grid + Carrossel Sandbox on Right */}
+              <div className="lg:col-span-7 space-y-6">
+                
+                {/* Instagram interactive carrossel sandbox */}
+                <div className="bg-[#1c1c1e] border border-zinc-800 p-6 rounded-[2.5rem] shadow-2xl flex flex-col">
                   
                   <div className="flex items-center justify-between border-b border-zinc-800 pb-4 mb-6">
                     <div className="flex items-center gap-3">
@@ -698,7 +769,7 @@ function Home() {
                         <p className="text-[9px] text-zinc-500 font-jakarta">Instagram Premium Feed</p>
                       </div>
                     </div>
-                    <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-bold uppercase">Criativo {currentPodtaIndex + 1}/6</span>
+                    <span className="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-bold uppercase">Carrossel {currentPodtaIndex + 1}/6</span>
                   </div>
 
                   {/* Active carousel slide */}
@@ -706,9 +777,9 @@ function Home() {
                     <img 
                       src={podtaImages[currentPodtaIndex].src} 
                       alt={podtaImages[currentPodtaIndex].title} 
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
+                      className="w-full h-full object-cover transition-transform duration-75 hover:scale-102" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                       <span className="text-xs text-white/95 font-jakarta flex items-center gap-1.5"><Maximize2 className="w-3.5 h-3.5" /> Ampliar Criativo</span>
                     </div>
                   </div>
@@ -734,83 +805,94 @@ function Home() {
                     </button>
                   </div>
                 </div>
+
+                {/* Sub grid showing other posts in grid style to avoid just having the carousel */}
+                <div className="grid grid-cols-3 gap-3">
+                  {podtaImages.slice(0, 3).map((item, idx) => (
+                    <div 
+                      key={idx} 
+                      onClick={() => setActiveImage(item.src)}
+                      className="relative aspect-square rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer group"
+                    >
+                      <img src={item.src} alt={item.title} className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300" />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors flex items-center justify-center">
+                        <span className="text-[8px] tracking-wider uppercase font-bold text-white bg-black/60 px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">Ver</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
               </div>
+
             </div>
           </div>
         </ScrollSectionWrapper>
 
-        {/* 2.2 DELLA BRIANZA (VÍDEO SHOWCASE) */}
+        {/* 2.2 DELLA BRIANZA — VÍDEOS VERTICAIS 9:16 APPARENTES SIMULTANEAMENTE NA TELA */}
         <ScrollSectionWrapper>
-          <div className="bg-[#141416] text-[#e4e4e7] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-20 overflow-hidden shadow-2xl relative border border-zinc-800">
-            <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="bg-[#141416] text-[#e4e4e7] rounded-[3.5rem] p-6 md:p-16 mx-5 md:mx-10 mb-24 overflow-hidden shadow-2xl relative border border-zinc-800">
+            <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-red-500/5 rounded-full blur-[110px] pointer-events-none" />
             
-            <div className="grid gap-12 lg:grid-cols-12 items-center">
-              {/* Media Player Column */}
-              <div className="lg:col-span-7 flex flex-col items-center">
-                <div className="bg-[#1a1a1c] border border-zinc-800 rounded-[2.5rem] p-5 w-full shadow-2xl flex flex-col">
-                  
-                  {/* Top bar with buttons */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {dellaVideos.map((video) => (
-                      <button
-                        key={video.id}
-                        onClick={() => changeDellaVideo(video.id)}
-                        className={`text-xs font-jakarta font-bold px-4 py-2 rounded-full border transition-all ${currentDellaVideo === video.id ? "bg-red-600 border-red-500 text-white shadow-lg shadow-red-600/30" : "bg-[#242427] border-zinc-800 text-zinc-400 hover:text-white"}`}
-                      >
-                        {video.name}
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Video player frame */}
-                  <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-black border border-zinc-850 shadow-inner">
-                    <video
-                      key={currentDellaSrc}
-                      ref={dellaVideoRef}
-                      src={currentDellaSrc}
-                      preload="auto"
-                      controls
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  <div className="mt-4 flex items-center justify-between text-[11px] text-zinc-500 font-jakarta uppercase font-semibold">
-                    <span>Della Brianza • Audiovisual Premium</span>
-                    <span className="flex items-center gap-1 text-red-500"><Play className="w-3.5 h-3.5" /> Reproduzindo</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Text Info Column */}
-              <div className="lg:col-span-5 space-y-8">
+            <div className="grid gap-12 lg:grid-cols-12 items-start relative z-10">
+              
+              {/* Text Info Column on the Left for Variation */}
+              <div className="lg:col-span-4 space-y-8 lg:pr-4">
                 <div className="flex items-center gap-3">
-                  <span className="bg-red-650 border border-red-500 text-white px-3 py-1 rounded-full text-[10px] font-jakarta font-bold uppercase tracking-wider">Audiovisual & Posicionamento AVPN</span>
+                  <span className="bg-red-650 border border-red-500 text-white px-3 py-1 rounded-full text-[10px] font-jakarta font-bold uppercase tracking-wider">Direção de Arte & Audiovisual AVPN</span>
                   <span className="text-xs tracking-widest uppercase font-bold text-zinc-500">2026</span>
                 </div>
 
                 <div className="flex items-center gap-4">
                   <img src={dellaLogo} alt="Logo Della Brianza" className="w-12 h-12 object-contain bg-white rounded-xl p-1" />
-                  <h3 className="font-brand text-5xl md:text-6xl leading-[0.9] text-white uppercase tracking-tighter">
+                  <h3 className="font-brand text-6xl md:text-7xl leading-[0.85] text-white uppercase tracking-tighter">
                     Della <br/>
-                    <span className="text-red-500 italic font-normal font-sans">Brianza</span>
+                    <span className="text-red-500 italic font-normal font-sans font-brand">Brianza</span>
                   </h3>
                 </div>
 
                 <p className="font-jakarta text-zinc-300 text-base md:text-lg leading-relaxed text-balance">
-                  A Della Brianza vende uma autêntica viagem sensorial para Nápoles. Sendo a única pizzaria em Campinas e região metropolitana com a rigidíssima certificação internacional **AVPN (Vera Pizza Napoletana)**, ela valida com maestria e técnica a sua nobre proposta.
+                  A única pizzaria em Campinas e região metropolitana com a rigidíssima certificação internacional **AVPN (Vera Pizza Napoletana)**.
                   <br/><br/>
-                  Para o Instagram, o foco foi estruturado em criativos em vídeo impecáveis, mostrando de forma suculenta a excelência das matérias-primas e a beleza dos rituais artesanais italianos.
+                  Para transmitir a autenticidade napoletana, estruturamos uma **grade tripla de vídeos verticais Reels (9:16)** exibidos simultaneamente. Esse mosaico dinâmico e síncrono capta a suculência das coberturas, a montagem artesanal e a tradição dos selos históricos da marca de forma instantânea.
                 </p>
 
                 <div className="pt-6 border-t border-zinc-800 flex justify-between items-center text-xs font-jakarta">
-                  <span className="text-zinc-500 font-bold uppercase">Única Certificada AVPN em Campinas</span>
+                  <span className="text-zinc-500 font-bold uppercase">Napoletana Certificada</span>
                   <span className="text-red-500 font-bold uppercase tracking-widest">Tradição & Paladar</span>
                 </div>
               </div>
+
+              {/* Three 9:16 Video Reels columns visible simultaneously */}
+              <div className="lg:col-span-8 grid grid-cols-3 gap-4">
+                {dellaVideos.map((video) => (
+                  <div key={video.id} className="bg-[#1c1c1e] border border-zinc-850 rounded-[2rem] p-3 shadow-2xl flex flex-col relative group">
+                    <span className="text-[9px] uppercase tracking-widest text-zinc-500 font-bold text-center block mb-2 font-jakarta truncate">
+                      {video.name.split(" ")[0]}
+                    </span>
+                    
+                    {/* Video Player Box in strict 9:16 Aspect Ratio */}
+                    <div className="relative aspect-[9/16] w-full rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-inner">
+                      <video
+                        src={video.src}
+                        preload="auto"
+                        controls
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    <div className="mt-2 text-center">
+                      <span className="text-[8px] text-zinc-400 font-jakarta block leading-tight truncate">
+                        {video.name}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
             </div>
           </div>
         </ScrollSectionWrapper>
