@@ -20,6 +20,12 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Large media files (exceeds GitHub's 100MB limit)
+src/assets/**/*.mp4
+src/assets/**/*.mov
+src/assets/**/*.avi
+src/assets/**/*.mkv
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
